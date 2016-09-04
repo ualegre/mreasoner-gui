@@ -4,4 +4,179 @@
   <artifactId>mreasoner-gui</artifactId>
   <version>0.0.1</version>
   <name>mreasoner-gui</name>
+  <url>https://github.com/ualegre/mreasoner-gui/</url>
+  
+  	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+  
+	<issueManagement>
+		<url>https://github.com/ualegre/mreasoner-gui/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>GNU General Public License</name>
+			<url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/ualegre/mreasoner-gui/</url>
+		<connection>scm:git:git://github.com//ualegre/mreasoner-gui.git</connection>
+		<developerConnection>scm:git:git@github.com:ualegre/mreasoner-gui.git</developerConnection>
+	</scm>
+
+	<developers>
+		<developer>
+			<email>u.alegre@mdx.ac.uk</email>
+			<name>Unai Alegre</name>
+			<url>https://github.com/ualegre</url>
+			<id>ualegre</id>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+		    <groupId>com.github.ualegre</groupId>
+		    <artifactId>mreasoner</artifactId>
+		    <version>v0.0.3</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.ualegre</groupId>
+		    <artifactId>lfpubs2m</artifactId>
+		    <version>v0.0.1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+		      <groupId>com.github.github</groupId>
+			      <artifactId>site-maven-plugin</artifactId>
+			      <version>0.7</version>
+			      <configuration>
+			       <description>Official ${project.name} build of the
+			        ${project.version} release</description>
+			       <message>Official ${project.name} build</message>
+			       <server>github.com</server>
+			       <repositoryName>${git.name}</repositoryName>
+			       <repositoryOwner>ualegre</repositoryOwner>
+			      </configuration>
+			      <executions>
+			       <execution>
+			        <goals>
+			         <goal>site</goal>
+			        </goals>
+			        <phase>site</phase>
+			       </execution>
+			      </executions>
+		     </plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.7</version>
+				<configuration>
+					<message>Building site for ${project.version}</message>
+					<server>github</server>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.2</version>
+							<configuration>
+								<dependencyDetailsEnabled>true</dependencyDetailsEnabled>
+								<dependencyLocationsEnabled>true</dependencyLocationsEnabled>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.7</version>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-report-plugin</artifactId>
+							<version>2.6</version>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-checkstyle-plugin</artifactId>
+							<version>2.6</version>
+						</plugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+  
+    
+    
 </project>

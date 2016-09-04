@@ -1,0 +1,30 @@
+package edu.casetools.mreasoner.gui.Controller.Listeners;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import edu.casetools.mreasoner.gui.Controller.Controller;
+
+public class StratificationRadioButtonListener implements ActionListener{
+
+	Controller controller;
+
+	public StratificationRadioButtonListener(Controller controller){
+		this.controller = controller;
+	}
+	
+	public void actionPerformed(ActionEvent arg0) {
+		if(arg0.getActionCommand().equals("Yes")) simulationSelected();
+		if(arg0.getActionCommand().equals("No"))  realTimeSelected();	
+		
+	}
+	private void realTimeSelected() {
+		controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getGeneralConfigsPanel().getStratificationPanel().getLeftRadioButton().setSelected(false);
+		
+	}
+	private void simulationSelected() {
+		controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getGeneralConfigsPanel().getStratificationPanel().getRightRadioButton().setSelected(false);
+		
+	}
+
+}
