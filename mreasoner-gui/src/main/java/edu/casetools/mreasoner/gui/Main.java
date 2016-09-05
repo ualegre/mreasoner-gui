@@ -1,9 +1,9 @@
 package edu.casetools.mreasoner.gui;
 
-import edu.casetools.mreasoner.gui.Controller.Controller;
-import edu.casetools.mreasoner.gui.Model.Model;
-import edu.casetools.mreasoner.gui.View.View;
-import edu.casetools.mreasoner.input.configurations.MConfigurations;
+import edu.casetools.mreasoner.gui.core.controller.Controller;
+import edu.casetools.mreasoner.gui.core.model.Model;
+import edu.casetools.mreasoner.gui.core.view.View;
+import edu.casetools.mreasoner.configurations.data.MConfigurations;
 
 public class Main {
 	

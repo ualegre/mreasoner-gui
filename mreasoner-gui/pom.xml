@@ -47,10 +47,10 @@
 
 	<dependencies>
 		<dependency>
-		    <groupId>com.github.ualegre</groupId>
-		    <artifactId>mreasoner</artifactId>
-		    <version>v0.0.3</version>
-		</dependency>
+			    <groupId>com.github.ualegre</groupId>
+			    <artifactId>mreasoner</artifactId>
+			    <version>a41fe41aad</version>
+			</dependency>
 		
 		<dependency>
 		    <groupId>com.github.ualegre</groupId>
