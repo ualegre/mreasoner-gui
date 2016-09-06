@@ -5,9 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.Vector;
 
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
+import edu.casetools.mreasoner.configurations.reader.ParseException;
 import edu.casetools.mreasoner.core.MReasoner;
+import edu.casetools.mreasoner.gui.architecture.implementation.actuators.ActuatorManager;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.LibraryThread;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.SystemData;
+import edu.casetools.mreasoner.gui.architecture.implementation.events.VeraLogReader;
 import edu.casetools.mreasoner.gui.architecture.implementation.loader.SystemLoader;
 
 
@@ -18,7 +21,7 @@ public class Launcher {
 	SystemLoader 	  testCaseLoader;
 	MReasoner 		  mtpl;
 	ActuatorManager   actuatorManager;
-	EventReader		  eventReader;
+	VeraLogReader		  eventReader;
 	Vector<LibraryThread> externalLibraries;
 	
 
@@ -37,6 +40,12 @@ public class Launcher {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (edu.casetools.mreasoner.core.compiler.realtime.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		return true;
 	}
@@ -101,7 +110,7 @@ public class Launcher {
 			mtpl.terminate();
 			mtpl.join();
 			
-			eventReader.terminate();
+			eventReader.stop();
 			while(!eventReader.isFinalizationFinished()){
 				sleep(1);
 			}

@@ -58,7 +58,7 @@ public class EventSimulator extends Thread{
 		Vector<Event> events = new Vector<Event>();
 		
 		for(int i = 0; i < eventHistory.size(); i++){
-			//System.out.println("�������� eventHistory:"+eventHistory.get(i).getName()+"  "+eventHistory.get(i).getTime()+ " vs "+Reasoner.Reasoner.systemStatus.getTime().getSystemRealTime());
+			//System.out.println(" eventHistory:"+eventHistory.get(i).getName()+"  "+eventHistory.get(i).getTime()+ " vs "+Reasoner.Reasoner.systemStatus.getTime().getSystemRealTime());
 			//compareTimes(eventHistory.get(i).getTime(),Reasoner.Reasoner.systemStatus.getTime().getSystemRealTime());
 			if(compareTimes(eventHistory.get(i)) >= 0){
 			//	System.out.println("ENTROO!");
