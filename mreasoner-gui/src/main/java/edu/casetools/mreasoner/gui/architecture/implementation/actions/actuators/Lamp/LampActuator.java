@@ -1,4 +1,4 @@
-package edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.Lamp;
+package edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.Lamp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,8 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.Actuator;
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Elements.Action;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.Action;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.Actuator;
 
 
 

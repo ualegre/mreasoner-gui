@@ -1,6 +1,6 @@
-package edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.Lamp;
+package edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.Lamp;
 
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.ActuatorConfigs;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.ActuatorConfigs;
 
 public class LampConfigs extends ActuatorConfigs{
 

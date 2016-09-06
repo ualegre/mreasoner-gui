@@ -1,4 +1,4 @@
-package edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators;
+package edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators;
 
 public abstract class ActuatorConfigs {
 	 String state;

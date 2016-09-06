@@ -111,6 +111,7 @@ public class EventSimulator extends Thread{
 											MReasoner.systemStatus.getTime().getDayTimeFromRealTimeMillis()
 											
 										  );
+					MReasoner.systemStatus.occurs(events.get(i).getName(), events.get(i).getStatus(), true);
 					//connection.insertEvent(events.get(i));
 				}
 				MReasoner.semaphore.reasonerPut();

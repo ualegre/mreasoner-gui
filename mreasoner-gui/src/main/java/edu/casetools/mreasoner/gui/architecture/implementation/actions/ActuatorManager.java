@@ -1,4 +1,4 @@
-package edu.casetools.mreasoner.gui.architecture.implementation.actuators;
+package edu.casetools.mreasoner.gui.architecture.implementation.actions;
 
 import java.util.Vector;
 
@@ -6,11 +6,10 @@ import edu.casetools.mreasoner.configurations.data.MDBConfigs;
 import edu.casetools.mreasoner.configurations.data.MDBTypes.DB_IMPLEMENTATION;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperationsFactory;
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.Actuator;
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.ActuatorConfigs;
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.Lamp.LampActuator;
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Actuators.Lamp.LampConfigs;
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.Elements.Action;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.Actuator;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.ActuatorConfigs;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.Lamp.LampActuator;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.actuators.Lamp.LampConfigs;
 
 
 

@@ -81,9 +81,9 @@ public class SystemSpecificationEditorPanel extends JPanel {
 	
 	
 	public void resetFileText(){
-		String s = " states( s, s, s, s, s);\n\n is( ¬s );\n is( s );\n\n holdsAt(¬s ,0);\n\n"+
-				" occurs( ingr( ¬s ), time );\n occurs( ingr( s ), time );\n\n ssr( (¬ s, "+
-				"s, ¬s, s)   -> s );\n\n sEr( (¬s ,s ,¬s ,s )   -> s );";
+		String s = " states( s, s, s, s, s);\n\n is( #s );\n is( s );\n\n holdsAt(#s ,0);\n\n"+
+				" occurs( ingr( #s ), time );\n occurs( ingr( s ), time );\n\n ssr( (# s, "+
+				"s, #s, s)   -> s );\n\n sEr( (#s ,s ,#s ,s )   -> s );";
 		fileTextPane.getTextArea().setText(s);
 	}
 	

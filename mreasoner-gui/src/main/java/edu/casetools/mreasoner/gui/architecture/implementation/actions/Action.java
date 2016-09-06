@@ -1,4 +1,4 @@
-package edu.casetools.mreasoner.gui.architecture.implementation.actuators.Elements;
+package edu.casetools.mreasoner.gui.architecture.implementation.actions;
 
 public class Action {
 	

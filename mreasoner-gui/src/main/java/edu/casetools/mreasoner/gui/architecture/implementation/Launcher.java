@@ -7,7 +7,7 @@ import java.util.Vector;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.reader.ParseException;
 import edu.casetools.mreasoner.core.MReasoner;
-import edu.casetools.mreasoner.gui.architecture.implementation.actuators.ActuatorManager;
+import edu.casetools.mreasoner.gui.architecture.implementation.actions.ActuatorManager;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.LibraryThread;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.SystemData;
 import edu.casetools.mreasoner.gui.architecture.implementation.events.VeraLogReader;

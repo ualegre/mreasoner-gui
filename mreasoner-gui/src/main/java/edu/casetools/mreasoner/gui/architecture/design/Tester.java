@@ -37,9 +37,11 @@ public class Tester {
 		} catch (edu.casetools.mreasoner.core.compiler.iterations.ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (edu.casetools.mreasoner.core.compiler.realtime.ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
@@ -52,7 +54,6 @@ public class Tester {
 			System.out.println("TEST CASE: "+testCases.size());
 			MConfigurations configs = testCases.get(i).getSystemConfigs();
 			mtpl = new MReasoner(testCases.get(i).getSystemInput(),configs);
-			//mtpl.MTPLInitialization();
 
         	inputSimulator  = new EventSimulator(testCases.get(i).getSystemInput().getEventsHistory(),configs);
 			inputSimulator.start();
