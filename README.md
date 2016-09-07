@@ -5,7 +5,7 @@ The reasoning language is compatible with the LFPUBS language that learns freque
 More information can be found in: Unai Alegre, Juan Carlos Augusto, and Asier Aztiria. "Temporal reasoning for intuitive specification of context-awareness." Intelligent Environments (IE), 2014 International Conference on. IEEE, 2014.
  
 ## Download
-* [Version 0.0.2](https://github.com/ualegre/mreasoner-gui)
+* [Version 0.0.3](https://github.com/ualegre/mreasoner-gui)
 * Other Versions
 
 ### Third party libraries
@@ -16,7 +16,7 @@ More information can be found in: Unai Alegre, Juan Carlos Augusto, and Asier Az
 * see [LICENSE](https://github.com/ualegre/mreasoner-gui/blob/master/LICENSE.md) file
 
 ## Version 
-* Version 0.0.2
+* Version 0.0.3
 
 ## How-to use this code
 * see [INSTRUCTIONS](https://github.com/ualegre/mreasoner-gui/blob/master/INSTRUCTIONS.md) file

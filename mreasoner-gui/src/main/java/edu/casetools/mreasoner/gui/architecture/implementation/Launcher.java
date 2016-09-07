@@ -10,7 +10,7 @@ import edu.casetools.mreasoner.core.MReasoner;
 import edu.casetools.mreasoner.gui.architecture.implementation.actions.ActuatorManager;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.LibraryThread;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.SystemData;
-import edu.casetools.mreasoner.gui.architecture.implementation.events.VeraLogReader;
+import edu.casetools.mreasoner.gui.architecture.implementation.events.MVeraLogReader;
 import edu.casetools.mreasoner.gui.architecture.implementation.loader.SystemLoader;
 
 
@@ -21,7 +21,7 @@ public class Launcher {
 	SystemLoader 	  testCaseLoader;
 	MReasoner 		  mtpl;
 	ActuatorManager   actuatorManager;
-	VeraLogReader		  eventReader;
+	MVeraLogReader		  eventReader;
 	Vector<LibraryThread> externalLibraries;
 	
 
@@ -111,7 +111,7 @@ public class Launcher {
 			mtpl.join();
 			
 			eventReader.stop();
-			while(!eventReader.isFinalizationFinished()){
+			while(!eventReader.getSshClient().isFinalizationFinished()){
 				sleep(1);
 			}
 			actuatorManager.terminate();

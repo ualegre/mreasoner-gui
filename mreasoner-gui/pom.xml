@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.casetools</groupId>
   <artifactId>mreasoner-gui</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <name>mreasoner-gui</name>
   <url>https://github.com/ualegre/mreasoner-gui/</url>
   
@@ -60,27 +60,9 @@
 		</dependency>
 		
 		<dependency>
-		    <groupId>sshtools</groupId>
-		    <artifactId>j2ssh-ant</artifactId>
-		    <version>0.2.9</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>sshtools</groupId>
-		    <artifactId>j2ssh-core</artifactId>
-		    <version>0.2.9</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>sshtools</groupId>
-		    <artifactId>j2ssh-common</artifactId>
-		    <version>0.2.9</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>sshtools</groupId>
-		    <artifactId>j2ssh-daemon</artifactId>
-		    <version>0.2.9</version>
+		    <groupId>com.github.ualegre</groupId>
+		    <artifactId>vera_log_reader</artifactId>
+		    <version>v0.0.1</version>
 		</dependency>
 		
 	</dependencies>
