@@ -1,0 +1,112 @@
+
+Action Map 0
+
+(General Conditions)
+
+(Action Pattern 0)
+ON occurs (start,--,t0) Frequency: 9
+IF context ()
+THEN do (simple,(on,Alarm (0)) , t) when --
+
+(Action Pattern 1)
+ON occurs (simple,(on,Alarm (0)) , t0) Frequency: 9
+IF context ()
+THEN do (simple,(on,Bathroom (0)) , t) when t = t0 + 767.3333333333334 s.
+
+
+(Action Pattern 2)
+ON occurs (simple,(on,Bathroom (0)) , t0) Frequency: 9
+IF context ()
+THEN do (simple,(on,BathroomLights (0)) , t) when t = t0 + 2.0 s.
+
+
+(Action Pattern 3)
+ON occurs (simple,(on,BathroomLights (0)) , t0) Frequency: 9
+IF context ()
+THEN do (simple,(on,Cabinet (0)) , t) when t = t0 + 71.66666666666667 s.
+
+
+(Action Pattern 4)
+ON occurs (simple,(on,Cabinet (0)) , t0) Frequency: 8
+IF context ()
+THEN do (simple,(on,Mouthwash (0)) , t) when t = t0 + 5.0 s.
+
+(Action Pattern 5)
+ON occurs (simple,(on,Cabinet (0)) , t0) Frequency: 6
+IF context ()
+THEN do (unordered,((on,Towel (0)) & (on,Gel (0))), t) when t = t0 + 11.166666666666666 s.
+
+(Action Pattern 6)
+ON occurs (simple,(on,Cabinet (0)) , t0) Frequency: 1
+IF context ()
+THEN do (simple,(off,Cabinet (0)) , t) when t = t0 + 6.0 s.
+
+
+(Action Pattern 7)
+ON occurs (simple,(on,Mouthwash (0)) , t0) Frequency: 8
+IF context ()
+THEN do (simple,(off,Cabinet (0)) , t) when t = t0 + 1.125 s.
+
+
+(Action Pattern 8)
+ON occurs (simple,(off,Cabinet (0)) , t0) Frequency: 6
+IF context (( (time(<=,29856.0))) (Priority: 0) OR ( (time(<=,30137.0)) AND (time(>=,30005.0))) (Priority: 1))
+THEN do (simple,(on,Cabinet (0)) , t) when t = t0 + 94.33333333333333 s.
+
+(Action Pattern 9)
+ON occurs (simple,(off,Cabinet (0)) , t0) Frequency: 6
+IF context (( ) (Priority: -1))
+THEN do (simple,(on,Shower (0)) , t) when t = t0 + 153.5 s.
+
+(Action Pattern 10)
+ON occurs (simple,(off,Cabinet (0)) , t0) Frequency: 3
+IF context ()
+THEN do (simple,(off,BathroomLights (0)) , t) when t = t0 + 106.0 s.
+
+
+(Action Pattern 11)
+ON occurs (unordered,((on,Towel (0)) & (on,Gel (0))), t0) Frequency: 6
+IF context ()
+THEN do (simple,(off,Cabinet (0)) , t) when t = t0 + 1.0 s.
+
+
+(Action Pattern 12)
+ON occurs (simple,(on,Shower (0)) , t0) Frequency: 6
+IF context ()
+THEN do (simple,(off,Shower (0)) , t) when t = t0 + 293.0 s.
+
+
+(Action Pattern 13)
+ON occurs (simple,(off,Shower (0)) , t0) Frequency: 4
+IF context ()
+THEN do (simple,(on,BathroomFan (0)) , t) when t = t0 + 84.0 s.
+
+(Action Pattern 14)
+ON occurs (simple,(off,Shower (0)) , t0) Frequency: 2
+IF context ()
+THEN do (simple,(off,BathroomLights (0)) , t) when t = t0 + 442.5 s.
+
+
+(Action Pattern 15)
+ON occurs (simple,(on,BathroomFan (0)) , t0) Frequency: 4
+IF context ()
+THEN do (simple,(off,BathroomFan (0)) , t) when t = t0 + 209.25 s.
+
+
+(Action Pattern 16)
+ON occurs (simple,(off,BathroomFan (0)) , t0) Frequency: 4
+IF context ()
+THEN do (simple,(off,BathroomLights (0)) , t) when t = t0 + 159.0 s.
+
+
+(Action Pattern 17)
+ON occurs (simple,(off,BathroomLights (0)) , t0) Frequency: 9
+IF context ()
+THEN do (simple,(off,Bathroom (0)) , t) when t = t0 + 24.0 s.
+
+
+(Action Pattern 18)
+ON occurs (simple,(off,Bathroom (0)) , t0) Frequency: 9
+IF context ()
+THEN do (--,end,t) when --
+

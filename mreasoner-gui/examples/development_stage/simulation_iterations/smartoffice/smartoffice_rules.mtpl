@@ -1,0 +1,20 @@
+/************************************************************
+* EXAMPLE BASED ON: A system to reason about uncertain 					
+*															*
+*										
+*************************************************************/
+states( atDesk,advise,adviseEnabled,lampOn);
+
+ is( #atDesk );
+ is( atDesk );
+
+ holdsAt(#atDesk,0);
+ holdsAt(#lampOn,0);
+ holdsAt(#advise,0);
+ holdsAt(#adviseEnabled,0);
+
+ occurs( ingr( atDesk ), 4);
+
+ ssr( (<->[2] #advise)  -> #adviseEnabled);
+ sEr( ([-][5]atDesk ^ #lampOn ) -> lampOn );
+
