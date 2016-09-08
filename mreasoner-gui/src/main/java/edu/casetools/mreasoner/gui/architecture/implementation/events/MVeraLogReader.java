@@ -11,15 +11,18 @@ import edu.casetools.vera.logreader.ssh.SSHConfigs;
 public class MVeraLogReader extends VeraLogReader{
 
 	DatabaseOperations databaseOperations;
-	
+
 	public MVeraLogReader(MConfigurations configs, boolean silence){
 		databaseOperations = DatabaseOperationsFactory.getDatabaseOperations(DB_IMPLEMENTATION.POSTGRESQL, configs.getDBConfigs());
 		if(databaseOperations.getDBConnection().checkConnection() == STATUS.CONNECTED){
-			this.setSshClient(new MSSHConnection(databaseOperations,initSSHConfigs(silence)));
+			this.initialize(new MDataManager(databaseOperations),initSSHConfigs(silence));	
 		}else{
 			System.out.println("ERROR CONECTING TO THE DATABASE");
 		}	
 	}
+
+	
+
 
 	private SSHConfigs initSSHConfigs(boolean silence) {
 		SSHConfigs sshConfigs = new SSHConfigs();

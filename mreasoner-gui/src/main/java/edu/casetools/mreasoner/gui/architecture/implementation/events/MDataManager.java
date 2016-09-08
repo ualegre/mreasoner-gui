@@ -1,18 +1,18 @@
 package edu.casetools.mreasoner.gui.architecture.implementation.events;
 
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
+import edu.casetools.vera.logreader.VeraLogDataManager;
 import edu.casetools.vera.logreader.data.VeraData;
 import edu.casetools.vera.logreader.data.VeraEvent;
 import edu.casetools.vera.logreader.data.VeraVariable;
 import edu.casetools.vera.logreader.ssh.SSHConfigs;
-import edu.casetools.vera.logreader.ssh.SSHConnection;
 
-public class MSSHConnection extends SSHConnection{
+
+public class MDataManager extends VeraLogDataManager {
 
 	DatabaseOperations databaseOperations;
 	
-	public MSSHConnection(DatabaseOperations databaseOperations,SSHConfigs configs){
-		super(configs);
+	public MDataManager(DatabaseOperations databaseOperations){
 		this.databaseOperations = databaseOperations;
 	}
 	
