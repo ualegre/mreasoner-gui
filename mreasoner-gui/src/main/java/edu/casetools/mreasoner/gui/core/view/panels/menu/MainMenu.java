@@ -2,24 +2,29 @@ package edu.casetools.mreasoner.gui.core.view.panels.menu;
 
 import java.awt.event.ActionListener;
 
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
+
 
 
 
 public class MainMenu extends JMenuBar{
 	private JFileChooser 	    fileChooser;
 	private static final long serialVersionUID = 1L;
-	private JMenu fileMenu,systemSpecificationMenu,resultLogMenu,translatorMenu,configsMenu;
+	private JMenu fileMenu,systemSpecificationMenu,resultLogMenu,translatorMenu,configsMenu,exportMenu;
 	private JButton startTest,stopTest;
 	private JMenuItem newSSMenu,loadSSMenu,saveSSMenu,saveAsSSMenu,saveResultLog,
 					  saveResultLogAs,loadFile,translate,clear,newConfigs,loadConfigs,
-					  saveConfigs,saveConfigsAs;
+					  saveConfigs,saveConfigsAs,exportToNuSMV;
+	public enum FILETYPE {CONF,SMV,MTPL, LFPUBS};
+	public enum FILECHOOSER {OPEN,SAVE};
 
 	//private String fileName,resultsPath,configsPath,LFPUBSFileName;
 
@@ -32,10 +37,12 @@ public class MainMenu extends JMenuBar{
 	   resultLogMenu   			= new JMenu("System Results Log");
 	   translatorMenu  			= new JMenu("LFPUBS Output File");
 	   configsMenu              = new JMenu("Session");
+	   exportMenu				= new JMenu("Export");
        newSSMenu		   	 	= new JMenuItem("New File");
        loadSSMenu        		= new JMenuItem("Load File");
        saveSSMenu        		= new JMenuItem("Save File");
        saveAsSSMenu 	    	= new JMenuItem("Save File As");
+       exportToNuSMV        	= new JMenuItem("Export to NuSMV");
        saveResultLog   			= new JMenuItem("Save Result");
        saveResultLogAs 			= new JMenuItem("Save Result As");
        loadFile        			= new JMenuItem("Load LFPUBS Output File");
@@ -60,6 +67,7 @@ public class MainMenu extends JMenuBar{
        systemSpecificationMenu.add(loadSSMenu);
        systemSpecificationMenu.add(saveSSMenu);
        systemSpecificationMenu.add(saveAsSSMenu);
+       systemSpecificationMenu.add(exportMenu);
        
        translatorMenu.add(loadFile);
        translatorMenu.addSeparator();
@@ -84,6 +92,7 @@ public class MainMenu extends JMenuBar{
        fileMenu.add(resultLogMenu);
        fileMenu.add(translatorMenu);
 
+       exportMenu.add(exportToNuSMV);
 
 
        this.add(fileMenu);
@@ -137,6 +146,7 @@ public class MainMenu extends JMenuBar{
 		this.loadSSMenu.addActionListener(actionListener);
 		this.saveSSMenu.addActionListener(actionListener);
 		this.saveAsSSMenu.addActionListener(actionListener);
+		this.exportToNuSMV.addActionListener(actionListener);
 		this.saveResultLog.addActionListener(actionListener);
 		this.startTest.addActionListener(actionListener);
 		this.stopTest.addActionListener(actionListener);
@@ -245,16 +255,41 @@ public class MainMenu extends JMenuBar{
 //		 }else return null;
 //	}
 	
-	public String displayFileChooser(String actualPath,boolean type){
-		this.fileChooser = new JFileChooser(actualPath);
+	public String displayFileChooser(String actualPath,FILECHOOSER type, FILETYPE extension){
+		fileChooser = new JFileChooser(actualPath);
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		int fileChooserVal;
-		if(type)fileChooserVal = fileChooser.showOpenDialog(this);
-		else fileChooserVal = fileChooser.showSaveDialog(this);
+		fileChooser.setFileFilter(getFileFilter(extension));
+		int fileChooserVal = showFileChooser(type);
 		 if(fileChooserVal == JFileChooser.APPROVE_OPTION) {
-		//	resultsPath	= fileChooser.getSelectedFile().getAbsolutePath();
 			return fileChooser.getSelectedFile().getAbsolutePath();
 		 }else return null;
+	}
+
+	private int showFileChooser(FILECHOOSER type) {
+		switch(type){
+			case OPEN:
+				return fileChooser.showOpenDialog(this);
+			case SAVE:
+				return fileChooser.showSaveDialog(this);
+			default:
+				return -1;
+		}
+	}
+
+	private FileNameExtensionFilter getFileFilter(FILETYPE extension) {
+		switch(extension){
+			case CONF:
+				return new FileNameExtensionFilter("M Config File", new String[] {"mses","txt"});
+			case SMV:
+				return new FileNameExtensionFilter("NuSMV File", new String[] {"smv","txt"});
+			case MTPL:
+				return new FileNameExtensionFilter("M File", new String[] {"mtpl","txt"});
+			case LFPUBS:
+				return new FileNameExtensionFilter("LFPUBS File", new String[] {"txt"});
+			default:
+				return null;
+		}
+		
 	}
 	
 

@@ -2,6 +2,7 @@ package edu.casetools.mreasoner.gui.core.model;
 
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperationsFactory;
+import edu.casetools.mreasoner.gui.core.model.files.ExportManager;
 import edu.casetools.mreasoner.gui.core.model.files.SystemConfigsReader;
 import edu.casetools.mreasoner.gui.core.model.files.TesterModel;
 import edu.casetools.mreasoner.gui.core.model.reasoner.ArchitectureManager;
@@ -17,6 +18,7 @@ public class Model {
 	private TesterModel   		testerModel;
 	private ArchitectureManager 		reasonerModel;
 	//private Translator			LFPUBSTranslator;
+	private ExportManager exporterModel;
 	private DatabaseOperations  dbOperations;
 	private SystemConfigsReader       configsReader;
 
@@ -25,11 +27,14 @@ public class Model {
 		testerModel = new TesterModel();
 		reasonerModel = new ArchitectureManager();
 	//	LFPUBSTranslator = new Translator(false);
+		exporterModel = new ExportManager();
+		
 		configsReader = new SystemConfigsReader();
 		if(configs != null){
 			dbOperations = DatabaseOperationsFactory.getDatabaseOperations(
 					DB_IMPLEMENTATION.POSTGRESQL,configs.getDBConfigs());
 		}
+		
 
 	}
 
@@ -56,6 +61,10 @@ public class Model {
 	
 	public SystemConfigsReader getConfigsReader(){
 		return this.configsReader;
+	}
+	
+	public ExportManager getExporterModel(){
+		return this.exporterModel;
 	}
 	
 }

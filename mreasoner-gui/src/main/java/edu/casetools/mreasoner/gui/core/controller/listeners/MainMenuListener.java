@@ -10,6 +10,8 @@ import java.io.InputStream;
 import edu.casetools.lfpubs2m.LFPUBS2MTranslator;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.gui.core.controller.Controller;
+import edu.casetools.mreasoner.gui.core.view.panels.menu.MainMenu.FILECHOOSER;
+import edu.casetools.mreasoner.gui.core.view.panels.menu.MainMenu.FILETYPE;
 
 
 
@@ -38,12 +40,25 @@ public class MainMenuListener implements ActionListener {
 		else if(e.getActionCommand().equals("Load Session")) loadConfigurationsButton();
 		else if(e.getActionCommand().equals("Save Session")) saveConfigurationsButton();
 		else if(e.getActionCommand().equals("Save Session As")) saveConfigurationsButtonAs();
+		else if(e.getActionCommand().equals("Export to NuSMV")) exportToNuSMV();
 		
 	}
 	
+	private void exportToNuSMV() {
+		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath();
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.SAVE, FILETYPE.SMV);//controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().displaySaveConfigsFileChooser();
+		
+		if(file != null){			
+			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(file);
+			MConfigurations configs = getSystemConfigs();
+			controller.getModel().getExporterModel().export(file,configs);		
+		}
+		
+	}
+
 	private void saveConfigurationsButtonAs() {
 		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, false);//controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().displaySaveConfigsFileChooser();
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.SAVE, FILETYPE.CONF);//controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().displaySaveConfigsFileChooser();
 		
 		if(file != null){
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(file);
@@ -57,7 +72,7 @@ public class MainMenuListener implements ActionListener {
 
 	private void loadConfigurationsButton() {
 		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath,true);
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.OPEN, FILETYPE.CONF);
 		controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().setText("");
 		if(file != null){
 			MConfigurations configs = controller.getModel().getConfigsReader().readConfigs(file);
@@ -115,7 +130,7 @@ public class MainMenuListener implements ActionListener {
 
 	private void loadLFPUBSFile() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName,true);
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.OPEN, FILETYPE.LFPUBS);
 		loadLFPUBSFileView(file);
 
 	}
@@ -148,7 +163,7 @@ public class MainMenuListener implements ActionListener {
 	
 	private void saveResultAsButtonAction() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getResultsPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName,false);
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.SAVE, FILETYPE.CONF);
 		if(file != null){
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setResultsPath(file);
 			String content = controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().getText();
@@ -212,7 +227,7 @@ public class MainMenuListener implements ActionListener {
 
 	private void saveAsButtonAction() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName,false);
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.SAVE, FILETYPE.MTPL);
 		if(file != null){
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setSystemDeclarationFilePath(file);
 			String content = controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getFileTextPane().getText();
@@ -225,7 +240,7 @@ public class MainMenuListener implements ActionListener {
 
 	private void loadButtonAction() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName,true);
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.OPEN, FILETYPE.MTPL);
 		loadSystemSpecificationFileView(file);	
 		
 	}

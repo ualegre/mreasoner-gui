@@ -65,6 +65,12 @@
 		    <version>v0.0.4</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>com.github.ualegre</groupId>
+		    <artifactId>m2nusmv</artifactId>
+		    <version>v0.2.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -144,8 +150,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
