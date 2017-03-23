@@ -97,7 +97,7 @@ public class ExportManager {
 	private boolean boundedOperatorExists(BoundedOperator bop) {
 		boolean exists = false;
 		for(BoundedOperator existingBop : verificationData.getBops()){
-			if(existingBop.getId().equals(bop.getId())){
+			if(existingBop.getOperatorName().equals(bop.getOperatorName())){
 				exists = true;
 			}
 		}

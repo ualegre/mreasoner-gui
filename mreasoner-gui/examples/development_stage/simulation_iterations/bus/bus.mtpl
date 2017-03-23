@@ -1,0 +1,84 @@
+states(userOnBusStation, userStandingStill, busInStart,
+busOnDestination, busOneStopBefore, userAtWalkingSpeed,
+userInBusRoute, busInDestination, arrivedSafe, failedToGetOff,
+userOnWalkingRoute, userDeviated, maxDeviationDistance, 
+maxDeviationNo, userLost, notifyBusLine, 
+notifyBusTimeRemaining, notifyWaitingTooLong, notifySUWaitingTooLong,
+callSU, notifyGetOnBus, notifyGetOffBus, notifyPressStopButton,
+notifyFailedToGetOff, recalculateRoute, notifySUFailedToGetOff,
+locationRequest, notifyArrivedSafe, notifySUArrivedSafe, notifySUuserLost, requestLocation); 
+
+is(userOnBusStation);
+is(userStandingStill);
+is(busInStart);
+is(busOnDestination);
+is(busOneStopBefore);
+is(userAtWalkingSpeed);
+is(userInBusRoute);
+is(busInDestination);
+is(userOnWalkingRoute);
+
+
+holdsAt(arrivedSafe,0);
+holdsAt(failedToGetOff,0);
+holdsAt(userDeviated,0);
+holdsAt(maxDeviationDistance,0);
+holdsAt(maxDeviationNo,0);
+holdsAt(userLost,0);
+holdsAt(notifyBusLine,0);
+holdsAt(notifyBusTimeRemaining,0);
+holdsAt(notifyWaitingTooLong,0);
+holdsAt(notifySUWaitingTooLong,0);
+holdsAt(callSU,0);
+holdsAt(notifyGetOffBus,0);
+holdsAt(notifyPressStopButton,0);
+holdsAt(notifyFailedToGetOff,0);
+holdsAt(recalculateRoute,0);
+holdsAt(notifySUFailedToGetOff,0);
+holdsAt(userOnBusStation,0);
+holdsAt(locationRequest,0);
+holdsAt(notifyArrivedSafe,0);
+holdsAt(notifySUArrivedSafe,0);
+holdsAt(notifySUuserLost,0);
+holdsAt(requestLocation,0);
+
+//Situation 01 PU waiting for bus - arrives to the station
+ssr( (userOnBusStation)  ->  notifyBusLine);
+ssr( (userOnBusStation)  ->  notifyBusTimeRemaining);
+
+//Situation 02 PU waiting for bus - bus fails to arrive
+ssr( (userOnBusStation ^ [-][20]userStandingStill ^ <->[10000-15000]#busInStart)  ->  notifyWaitingTooLong);
+ssr( (userOnBusStation ^ [-][20]userStandingStill ^ <->[10000-15000]#busInStart)  ->  callSU);
+
+//Situation 03 PU waiting for bus - bus arrives
+ssr( (busInStart ) ->  notifyGetOnBus);
+
+//Situation 04 Going by bus - arrives to destination stop
+ssr( (busOnDestination ) ->  notifyGetOffBus);
+
+//Situation 05 Going by bus - has to press stop button
+ssr( (busOneStopBefore) ->  notifyPressStopButton);
+
+//Situation 06 Getting off bus - fails to get off at the correct stop
+ssr( (userAtWalkingSpeed ^ #userInBusRoute) ->  failedToGetOff);
+ssr( (failedToGetOff) ->  notifyFailedToGetOff);
+ssr( (failedToGetOff) ->  callSU);
+ssr( (failedToGetOff) ->  recalculateRoute);
+ssr( (failedToGetOff) ->  notifySUFailedToGetOff);
+ssr( (failedToGetOff) ->  requestLocation);
+
+//Situation 07 Walking - the user gets lost
+//ssr( #userOnWalkingRoute ->  userDeviated);
+//ssr( userDeviated ^ maxDeviationDistance ->  userLost);
+//ssr( userDeviated ^ maxDeviationNo ->  userLost);
+//ssr( userLost ->  callSU);
+//ssr( userLost ->  notifySUuserLost);
+//ssr( userLost ->  requestLocation);
+
+//Situation 08 Getting off bus - the primary user gets off the bus in the destination stop
+ssr( (userAtWalkingSpeed ^ busInDestination) ->  arrivedSafe);
+ssr( (arrivedSafe) ->  notifyArrivedSafe);
+ssr( (arrivedSafe) ->  notifySUArrivedSafe);
+
+
+
