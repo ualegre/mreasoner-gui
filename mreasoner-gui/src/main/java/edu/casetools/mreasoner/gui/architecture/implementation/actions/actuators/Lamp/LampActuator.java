@@ -35,10 +35,10 @@ public class LampActuator implements Actuator{
 			connection = service.openConnection();
 	        BufferedReader in = new BufferedReader(new InputStreamReader(
 	                                    connection.getInputStream()));
-	  //      String inputLine;
+	        String inputLine;
 	        System.out.println("ACTUATOR MANAGER: SWITCHING LAMP "+action.getDevice()+" TO VALUE "+action.getValue());
-//	        while ((inputLine = in.readLine()) != null) 
-//	            System.out.println(inputLine);
+	        while ((inputLine = in.readLine()) != null) 
+            System.out.println(inputLine);
 	        in.close();
 		}
 	} catch (MalformedURLException e) {

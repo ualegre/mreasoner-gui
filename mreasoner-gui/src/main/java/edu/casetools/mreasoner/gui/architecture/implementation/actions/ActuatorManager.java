@@ -28,7 +28,7 @@ public class ActuatorManager extends Thread{
 	}
 	
 	private void initialization(){
-		LampConfigs lampOnConfigs = new LampConfigs("lampOn");
+		LampConfigs lampOnConfigs = new LampConfigs("Kettle");
 		LampActuator lampOn = new LampActuator(lampOnConfigs);
 		actuators.add(lampOn);
 		
