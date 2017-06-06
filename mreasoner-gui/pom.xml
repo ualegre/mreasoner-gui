@@ -62,7 +62,7 @@
 		<dependency>
 		    <groupId>com.github.ualegre</groupId>
 		    <artifactId>vera_log_reader</artifactId>
-		    <version>9a212cbdbe</version>
+		    <version>v0.2.1</version>
 		</dependency>
 		
 		<dependency>

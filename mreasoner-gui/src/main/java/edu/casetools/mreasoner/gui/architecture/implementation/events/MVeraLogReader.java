@@ -8,7 +8,6 @@ import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperationsFactory;
 import edu.casetools.vera.logreader.VeraLogReader;
 import edu.casetools.vera.logreader.ssh.SSHConfigs;
-import edu.casetools.vera.logreader.utils.Constants;
 
 
 public class MVeraLogReader extends VeraLogReader{
@@ -37,10 +36,7 @@ public class MVeraLogReader extends VeraLogReader{
 		sshConfigs.setPassword("smarthouse123");
 		sshConfigs.setUsername("root");
 		sshConfigs.setSilence(silence);
-		
-		Constants.setLocalServerIP("10.12.102.58");
-		Constants.hostname = "10.12.102.156";
-		
+		sshConfigs.setHostname("10.12.102.156");
 		return sshConfigs;
 	}
 

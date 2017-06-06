@@ -83,7 +83,6 @@ public class Launcher {
 			
 			System.out.println("\nINITIALIZING EVENT READER..\n");
 			eventReader = new MVeraLogReader(configs,false);
-			System.out.println("insert a number to close");
 			eventReader.start();
 			sleep(500);
 			
