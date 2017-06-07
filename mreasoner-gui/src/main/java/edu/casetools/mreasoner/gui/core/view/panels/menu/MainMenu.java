@@ -2,7 +2,6 @@ package edu.casetools.mreasoner.gui.core.view.panels.menu;
 
 import java.awt.event.ActionListener;
 
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;

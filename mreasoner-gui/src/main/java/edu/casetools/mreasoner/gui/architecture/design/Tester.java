@@ -3,7 +3,6 @@ package edu.casetools.mreasoner.gui.architecture.design;
 import java.io.FileNotFoundException;
 import java.util.Vector;
 
-
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.reader.ParseException;
 import edu.casetools.mreasoner.core.MReasoner;

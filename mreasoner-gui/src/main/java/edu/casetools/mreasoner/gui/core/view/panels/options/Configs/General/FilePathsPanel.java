@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
+import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 
 
 public class FilePathsPanel extends JPanel{

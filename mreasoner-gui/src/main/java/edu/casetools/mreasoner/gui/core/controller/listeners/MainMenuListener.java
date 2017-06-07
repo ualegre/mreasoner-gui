@@ -2,10 +2,7 @@ package edu.casetools.mreasoner.gui.core.controller.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import edu.casetools.lfpubs2m.LFPUBS2MTranslator;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;

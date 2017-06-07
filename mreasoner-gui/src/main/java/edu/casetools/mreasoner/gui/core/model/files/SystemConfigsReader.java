@@ -3,9 +3,9 @@ package edu.casetools.mreasoner.gui.core.model.files;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.reader.ConfigsReader;
 import edu.casetools.mreasoner.configurations.reader.ParseException;
-import edu.casetools.mreasoner.configurations.data.MConfigurations;
 
 
 

@@ -1,5 +1,6 @@
 package edu.casetools.mreasoner.gui.core.controller;
 
+import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.gui.core.controller.listeners.ConfigsListener;
 import edu.casetools.mreasoner.gui.core.controller.listeners.IterationTimeRadioButtonListener;
 import edu.casetools.mreasoner.gui.core.controller.listeners.MainMenuListener;
@@ -8,7 +9,6 @@ import edu.casetools.mreasoner.gui.core.controller.listeners.StratificationRadio
 import edu.casetools.mreasoner.gui.core.controller.listeners.TabbedPaneListener;
 import edu.casetools.mreasoner.gui.core.model.Model;
 import edu.casetools.mreasoner.gui.core.view.View;
-import edu.casetools.mreasoner.configurations.data.MConfigurations;
 
 
 public class Controller {

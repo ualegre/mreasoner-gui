@@ -112,7 +112,7 @@ public class ExportManager {
 
 
 	private List<BoundedOperator> getRuleTemporalOperators(SameTimeRule str) {
-		List<BoundedOperator> bops = new ArrayList<>();
+		List<BoundedOperator> bops = new ArrayList<BoundedOperator>();
 		for(TemporalOperator bop : str.getTemporalOperators()){
 			bops.add(getBoundedOperator(bop));
 		}
@@ -199,7 +199,7 @@ public class ExportManager {
 	}
 	
 	private List<RuleElement> getRuleAntecedents(SameTimeRule str) {
-		List<RuleElement> antecedents = new ArrayList<>();
+		List<RuleElement> antecedents = new ArrayList<RuleElement>();
 		for(edu.casetools.mreasoner.core.elements.states.State state : str.getAntecedents()){
 			antecedents.add(stateToRuleElement(state));
 		}

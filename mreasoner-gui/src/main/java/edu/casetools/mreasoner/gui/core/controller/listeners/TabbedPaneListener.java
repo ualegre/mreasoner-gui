@@ -3,6 +3,7 @@ package edu.casetools.mreasoner.gui.core.controller.listeners;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.gui.core.controller.Controller;
@@ -10,7 +11,6 @@ import edu.casetools.mreasoner.gui.core.view.panels.models.Models.EventsTableMod
 import edu.casetools.mreasoner.gui.core.view.panels.models.Models.InternalEventsTableModel;
 import edu.casetools.mreasoner.gui.core.view.panels.models.Models.ResultsTableModel;
 import edu.casetools.mreasoner.gui.core.view.panels.models.Models.SensorsTableModel;
-import edu.casetools.mreasoner.configurations.data.MConfigurations;
 
 public class TabbedPaneListener implements MouseListener{
 

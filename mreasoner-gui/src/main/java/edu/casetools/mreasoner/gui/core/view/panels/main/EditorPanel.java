@@ -10,20 +10,18 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
 public class EditorPanel extends JPanel{
-    // Two controls, one is the editor and the other is our little status bar at the bottom.
+
+	// Two controls, one is the editor and the other is our little status bar at the bottom.
     // When we update the editor, the change in caret will update the status text field.
-    private JTextArea editor;
+	private static final long serialVersionUID = 7993839618019764616L;
+	private JTextArea editor;
     private JTextField status;
 	private JScrollPane fileScrollPane;
-    // Start of our caretDemo class
+	
     public EditorPanel() {
-//        setTitle("Caret Demo");
-//        setSize(500,500);
 		
         // Lets create a border layout to make positioning of items easy and quick.
         this.setLayout(new BorderLayout());
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         editor = new JTextArea();
 
         // Add a caretListener to the editor. This is an anonymous class because it is inline and has no specific name.

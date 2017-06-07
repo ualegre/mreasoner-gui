@@ -1,14 +1,14 @@
 package edu.casetools.mreasoner.gui.core.model;
 
+import edu.casetools.mreasoner.configurations.data.MConfigurations;
+import edu.casetools.mreasoner.configurations.data.MDBTypes;
+import edu.casetools.mreasoner.configurations.data.MDBTypes.DB_IMPLEMENTATION;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperationsFactory;
 import edu.casetools.mreasoner.gui.core.model.files.ExportManager;
 import edu.casetools.mreasoner.gui.core.model.files.SystemConfigsReader;
 import edu.casetools.mreasoner.gui.core.model.files.TesterModel;
 import edu.casetools.mreasoner.gui.core.model.reasoner.ArchitectureManager;
-import edu.casetools.mreasoner.configurations.data.MConfigurations;
-import edu.casetools.mreasoner.configurations.data.MDBTypes;
-import edu.casetools.mreasoner.configurations.data.MDBTypes.DB_IMPLEMENTATION;
 
 //import Translator.Translator;
 

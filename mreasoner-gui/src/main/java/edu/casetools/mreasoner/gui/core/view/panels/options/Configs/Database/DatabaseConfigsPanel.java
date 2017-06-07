@@ -15,10 +15,10 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
-import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.data.MDBConfigs;
+import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
+import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 
 
 

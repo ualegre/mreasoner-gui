@@ -1,8 +1,6 @@
 package edu.casetools.mreasoner.gui.core.view.panels.options.Configs.General;
 
 import java.awt.BorderLayout;
-
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -11,13 +9,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.gui.core.view.panels.options.Panels.RadioButtonsPanel;
-import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.data.MConfigurations.EXECUTION_MODE;
+import edu.casetools.mreasoner.gui.core.view.panels.options.Panels.RadioButtonsPanel;
 
 public class GeneralConfigsPanel extends JPanel{
 	private static final long serialVersionUID = 1L;

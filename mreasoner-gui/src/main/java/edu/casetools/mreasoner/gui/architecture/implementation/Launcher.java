@@ -2,6 +2,7 @@ package edu.casetools.mreasoner.gui.architecture.implementation;
 
 
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
@@ -12,7 +13,6 @@ import edu.casetools.mreasoner.gui.architecture.implementation.elements.LibraryT
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.SystemData;
 import edu.casetools.mreasoner.gui.architecture.implementation.events.MVeraLogReader;
 import edu.casetools.mreasoner.gui.architecture.implementation.loader.SystemLoader;
-import java.util.Scanner;
 
 
 public class Launcher {

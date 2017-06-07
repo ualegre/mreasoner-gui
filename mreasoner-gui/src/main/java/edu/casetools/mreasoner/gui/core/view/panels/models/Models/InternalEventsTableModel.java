@@ -1,8 +1,8 @@
 package edu.casetools.mreasoner.gui.core.view.panels.models.Models;
 
+import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.gui.core.view.panels.models.DefaultModel;
-import edu.casetools.mreasoner.configurations.data.MConfigurations;
 
 
 public class InternalEventsTableModel extends DefaultModel{

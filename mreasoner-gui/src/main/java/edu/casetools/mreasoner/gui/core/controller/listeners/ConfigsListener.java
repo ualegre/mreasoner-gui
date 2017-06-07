@@ -3,23 +3,15 @@ package edu.casetools.mreasoner.gui.core.controller.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-
-
-
-
-import java.util.Vector;
-
+import edu.casetools.mreasoner.configurations.data.MConfigurations;
+import edu.casetools.mreasoner.configurations.data.MConfigurations.EXECUTION_MODE;
+import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
+import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.gui.core.controller.Controller;
 import edu.casetools.mreasoner.gui.core.view.panels.models.Models.EventsTableModel;
 import edu.casetools.mreasoner.gui.core.view.panels.models.Models.InternalEventsTableModel;
 import edu.casetools.mreasoner.gui.core.view.panels.models.Models.ResultsTableModel;
 import edu.casetools.mreasoner.gui.core.view.panels.models.Models.SensorsTableModel;
-import edu.casetools.mreasoner.configurations.data.MConfigurations;
-import edu.casetools.mreasoner.configurations.data.MConfigurations.EXECUTION_MODE;
-import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
-import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
 
 
 public class ConfigsListener implements ActionListener{
@@ -33,8 +25,6 @@ public class ConfigsListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getActionCommand().equals("Refresh")) refresh();
-//		else if(arg0.getActionCommand().equals("Add Relation"))addRelation();
-//		else if(arg0.getActionCommand().equals("Delete Selected Relation"))deleteSelectedRelation();
 		else if(arg0.getActionCommand().equals("Test"))testEnvironment_Iteration();
 		else if(arg0.getActionCommand().equals("Create"))createDatabase();
 		else if(arg0.getActionCommand().equals("Drop"))dropDatabase();

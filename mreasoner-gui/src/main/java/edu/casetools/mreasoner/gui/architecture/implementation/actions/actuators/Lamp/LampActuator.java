@@ -49,7 +49,7 @@ public class LampActuator implements Actuator{
 		lastAction = action;
 
 	}
-	@Override
+	
 	public LampConfigs getConfigs() {
 		return configs;
 	}

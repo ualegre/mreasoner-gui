@@ -10,10 +10,10 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.gui.core.view.panels.options.Panels.RadioButtonsPanel;
-import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.data.MConfigurations.EXECUTION_MODE;
+import edu.casetools.mreasoner.gui.core.view.panels.options.Panels.RadioButtonsPanel;
+import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 
 public class TimeConfigsPanel extends JPanel{
 	private static final long serialVersionUID = 1L;

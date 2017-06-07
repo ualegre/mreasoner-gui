@@ -1,6 +1,5 @@
 package edu.casetools.mreasoner.gui.core.view.panels.options.Configs.General;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 

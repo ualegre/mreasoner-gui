@@ -1,7 +1,6 @@
 package edu.casetools.mreasoner.gui.core.view.panels.options.Configs.EventReader;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -9,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
-
 
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 

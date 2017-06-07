@@ -13,9 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.data.MDBConfigs;
+import edu.casetools.mreasoner.gui.utils.SpringUtilities;
 
 
 
