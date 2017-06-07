@@ -5,7 +5,7 @@ import edu.casetools.vera.logreader.VeraLogDataManager;
 import edu.casetools.vera.logreader.data.VeraData;
 import edu.casetools.vera.logreader.data.VeraEvent;
 import edu.casetools.vera.logreader.data.VeraVariable;
-import edu.casetools.vera.logreader.ssh.SSHConfigs;
+
 
 
 public class MDataManager extends VeraLogDataManager {
@@ -33,7 +33,7 @@ public class MDataManager extends VeraLogDataManager {
 	protected void storeVeraVariable(VeraData data) {
 		VeraVariable variable = data.getVariable();
 		 if(!variable.isEmpty()){	
-			 if(variable.getVariable().equals(variable.VAR_TRIPPED)){
+			 if(variable.getVariable().contentEquals(variable.VAR_TRIPPED)||(variable.getVariable().contentEquals(variable.VAR_STATUS))){
 				 
 		 	 String state = databaseOperations.getState(variable.getDeviceId());
 
@@ -72,5 +72,17 @@ public class MDataManager extends VeraLogDataManager {
 		System.out.println("\n VERA LOG READER: Event Detection: "+state+ " - "
 		 +event.getStatus()+" - "+ event.getDate()+" "+ event.getTime());
 	}
+
+//	@Override
+//	protected void storeVeraEvent(VeraData data) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	protected void storeVeraVariable(VeraData data) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 }

@@ -9,7 +9,7 @@ public class LampConfigs extends ActuatorConfigs{
 	
 	public LampConfigs(String state){
 		super(state);
-		ip   = "192.168.81.1";
+		ip   = "10.12.102.156";
 		port = "3480";
 	}
 

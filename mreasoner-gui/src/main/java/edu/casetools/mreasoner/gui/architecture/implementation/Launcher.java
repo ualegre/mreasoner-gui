@@ -12,7 +12,7 @@ import edu.casetools.mreasoner.gui.architecture.implementation.elements.LibraryT
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.SystemData;
 import edu.casetools.mreasoner.gui.architecture.implementation.events.MVeraLogReader;
 import edu.casetools.mreasoner.gui.architecture.implementation.loader.SystemLoader;
-
+import java.util.Scanner;
 
 
 public class Launcher {
@@ -68,9 +68,6 @@ public class Launcher {
 		}
 	}
 	
-
-	
-	
 	public void initializeReasoner(){
 
 		if(systemData != null){
@@ -79,26 +76,27 @@ public class Launcher {
 
 			
 			initializeExternalJars();
-//			System.out.println("\nINITIALIZING ACTUATOR MANAGER..\n");
-//			actuatorManager = new ActuatorManager(configs.getDBConfigs());
-//			actuatorManager.start();
-//			sleep(500);
-//			
-//			System.out.println("\nINITIALIZING EVENT READER..\n");
-//			eventReader = new EventReader(configs,true);
-//			eventReader.startSSHConnection();
-//			sleep(500);
+			System.out.println("\nINITIALIZING ACTUATOR MANAGER..\n");
+			actuatorManager = new ActuatorManager(configs.getDBConfigs());
+			actuatorManager.start();
+			sleep(500);
 			
-//			while(!eventReader.isInitializationFinished()){
-//				sleep(1);
-//			}
-//			if(eventReader.checkConnection()){
+			System.out.println("\nINITIALIZING EVENT READER..\n");
+			eventReader = new MVeraLogReader(configs,false);
+			eventReader.start();
+			sleep(500);
 			
+			while(!eventReader.getSshClient().isInitializationFinished()){
+				sleep(1);
+			}
+			if(eventReader.checkConnection()){
 				System.out.println("\nINITIALIZING REASONER..\n");
 				mtpl.MTPLInitialization();
 				mtpl.run();	
-//			} else  {System.out.println("SSH Connection error");}
-		}
+			
+		}startSSHConnection();
+			} else  {System.out.println("SSH Connection error");
+				}
 
 
 	}
@@ -135,6 +133,17 @@ public class Launcher {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void stop() {
+		eventReader.stop();
+	}
+	public void startSSHConnection() {
+		Scanner in = new Scanner(System.in);
+		in.nextInt();
+		eventReader.stop();
+		in.close();
+		
+		
 	}
 	
 	
