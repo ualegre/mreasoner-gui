@@ -8,7 +8,6 @@ import java.util.Vector;
 import edu.casetools.mreasoner.configurations.data.MConfigurations;
 import edu.casetools.mreasoner.configurations.reader.ParseException;
 import edu.casetools.mreasoner.core.MReasoner;
-import edu.casetools.mreasoner.gui.architecture.implementation.actions.ActuatorManager;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.LibraryThread;
 import edu.casetools.mreasoner.gui.architecture.implementation.elements.SystemData;
 import edu.casetools.mreasoner.gui.architecture.implementation.events.MVeraLogReader;
@@ -20,7 +19,6 @@ public class Launcher {
 	SystemData 	      systemData;
 	SystemLoader 	  testCaseLoader;
 	MReasoner 		  mtpl;
-	ActuatorManager   actuatorManager;
 	MVeraLogReader		  eventReader;
 	Vector<LibraryThread> externalLibraries;
 	
@@ -56,15 +54,11 @@ public class Launcher {
 //			String a = "java -jar c:/b.jar";
 //			String[] commands = a.split(",");
 	
-			//System.out.println("LLEGO");
 			for(int i=0;i<commands.length;i++){
-				//System.out.println("GO! "+commands[i]);
-				//synchronizationStart();
 				LibraryThread thread = new LibraryThread(commands[i]);
 				externalLibraries.add(thread);
 				thread.start();
 			}
-			//System.out.println("FINISH");
 		}
 	}
 	
@@ -77,8 +71,6 @@ public class Launcher {
 			
 			initializeExternalJars();
 			System.out.println("\nINITIALIZING ACTUATOR MANAGER..\n");
-			actuatorManager = new ActuatorManager(configs.getDBConfigs());
-			actuatorManager.start();
 			sleep(500);
 			
 			System.out.println("\nINITIALIZING EVENT READER..\n");
@@ -112,8 +104,12 @@ public class Launcher {
 			while(!eventReader.getSshClient().isFinalizationFinished()){
 				sleep(1);
 			}
-			actuatorManager.terminate();
-			actuatorManager.join();
+			if(externalLibraries != null){
+				for(LibraryThread library : externalLibraries){
+					library.interrupt();
+					library.join();
+				}
+			}
 			
 
 		} catch (InterruptedException e) {
