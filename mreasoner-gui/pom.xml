@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.casetools</groupId>
   <artifactId>mreasoner-gui</artifactId>
-  <version>0.0.7</version>
+  <version>0.0.8</version>
   <name>mreasoner-gui</name>
   <url>https://github.com/ualegre/mreasoner-gui/</url>
   
@@ -68,7 +68,7 @@
 		<dependency>
 		    <groupId>com.github.ualegre</groupId>
 		    <artifactId>m2nusmv</artifactId>
-		    <version>v0.2.0</version>
+		    <version>v0.2.4</version>
 		</dependency>
 		
 	</dependencies>
