@@ -38,7 +38,7 @@ ssr((cabinet ^ [-][12]pattern_0 ^ time_context)  -> pattern_1);
 ssr((#cabinet ^ [-][22]pattern_1 ^ time_context) -> pattern_2);
 
 //Stratification Level k = 5 Rules
-ssr((cookerOn ^ [-][18]pattern_3 ^ time_context) -> pattern_3);
+ssr((cookerOn ^ [-][18]pattern_2 ^ time_context) -> pattern_3);
 
 //Stratification Level k = 6 Rules
 ssr((atKitchen ^ [-][123]pattern_3 ^ time_context) -> kettleOn);

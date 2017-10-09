@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import static java.lang.Math.toIntExact;
 
 import edu.casetools.dcase.m2nusmv.M2NuSMV;
 import edu.casetools.dcase.m2nusmv.data.MData;
