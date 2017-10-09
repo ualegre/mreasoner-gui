@@ -152,21 +152,16 @@ public class ExportManager {
 	private String getOperatorName(TemporalOperator top) {
 		switch(top.getType()){
 			case STRONG_RELATIVE:
-				return top.getName()+"_sip_"+getTimeInSeconds(top.getSinceValue().getBoundInMillis());
+				return top.getName()+"_sip_"+top.getSinceValue().getSimulation_value();
 			case WEAK_RELATIVE:
-				return top.getName()+"_wip_"+getTimeInSeconds(top.getSinceValue().getBoundInMillis());
+				return top.getName()+"_wip_"+top.getSinceValue().getSimulation_value();
 			case STRONG_ABSOLUTE:
-				return top.getName()+"_sap_"+getTimeInSeconds(top.getSinceValue().getBoundInMillis())+
-						"_"+getTimeInSeconds(top.getUntilValue().getBoundInMillis());
+				return top.getName()+"_sap_"+top.getSinceValue().getSimulation_value()+
+						"_"+top.getUntilValue().getSimulation_value();
 			case WEAK_ABSOLUTE:
-				return top.getName()+"_wap_"+getTimeInSeconds(top.getSinceValue().getBoundInMillis())+"_"+getTimeInSeconds(top.getUntilValue().getBoundInMillis());
+				return top.getName()+"_wap_"+top.getSinceValue().getSimulation_value()+"_"+top.getUntilValue().getSimulation_value();
 		}
 		return "";
-	}
-	
-	private int getTimeInSeconds(Long timeInMillis){
-		long timeInSeconds = (long) (timeInMillis * 0.001);
-		return toIntExact(timeInSeconds);
 	}
 
 	private BOP_TYPE getTemporalOperatorType(TemporalOperator top) {
