@@ -14,10 +14,10 @@ false
 true
 </USE_MAX_EXECUTION_TIME> 
 <EXECUTION_TIME> 
-11
+18190
 </EXECUTION_TIME> 
 <SYSTEM_SPECIFICATION_FILE_PATH> 
-examples\development_stage\simulation_iterations\smartoffice\smartoffice_rules.mtpl
+.\examples\development_stage\simulation_iterations\smartoffice\smartoffice_rules.mtpl
 </SYSTEM_SPECIFICATION_FILE_PATH> 
 <RESULTS_FILE_PATH> 
 null
@@ -26,7 +26,7 @@ null
 examples\lfpubs\lfpubs_output.txt
 </LFPUBS_OUTPUT_FILE_PATH> 
 <SESSION_FILE_PATH> 
-examples\development_stage\simulation_iterations\smartoffice\smartoffice_session.txt
+.\examples\development_stage\simulation_iterations\smartoffice\smartoffice_session.txt
 </SESSION_FILE_PATH> 
 <DATABASE_TYPE> 
 PostgreSQL
