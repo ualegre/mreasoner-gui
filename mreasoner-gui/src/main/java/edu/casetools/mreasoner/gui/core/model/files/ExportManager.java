@@ -151,13 +151,13 @@ public class ExportManager {
 	private String getOperatorName(TemporalOperator top) {
 		switch(top.getType()){
 		case STRONG_RELATIVE:
-			return "sip_"+top.getName();
+			return top.getName()+"_sip_"+top.getSinceValue();
 		case WEAK_RELATIVE:
-			return "wip_"+top.getName();
+			return top.getName()+"_wip_"+top.getSinceValue();
 		case STRONG_ABSOLUTE:
-			return "sap_"+top.getName();
+			return top.getName()+"_sap_"+top.getSinceValue()+"_"+top.getUntilValue();
 		case WEAK_ABSOLUTE:
-			return "wap_"+top.getName();
+			return top.getName()+"_wap_"+top.getSinceValue()+"_"+top.getUntilValue();
 	}
 	return "";
 	}
