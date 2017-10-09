@@ -45,6 +45,7 @@ ssr((atKitchen ^ [-][123]pattern_3 ^ time_context) -> kettleOn);
 
 //Stratification Level k = 7 Rules
 ssr(( [-][120]kettleOn ) -> #kettleOn);
+ssr(( #atKitchen ^ kettleOn) -> #kettleOn);
 
 //Next-Time Rules
 sEr((hazard) -> #cookerOn);
