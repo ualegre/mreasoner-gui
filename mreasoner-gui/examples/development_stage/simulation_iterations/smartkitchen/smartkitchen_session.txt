@@ -14,7 +14,7 @@ false
 true
 </USE_MAX_EXECUTION_TIME> 
 <EXECUTION_TIME> 
-18667
+18547
 </EXECUTION_TIME> 
 <SYSTEM_SPECIFICATION_FILE_PATH> 
 .\examples\development_stage\simulation_iterations\smartkitchen\smartkitchen_rules.mtpl
