@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.core.configs.MConfigurations.EXECUTION_MODE;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs.EXECUTION_MODE;
 import edu.casetools.mreasoner.gui.view.panels.options.Panels.RadioButtonsPanel;
 
 public class GeneralConfigsPanel extends JPanel{
@@ -23,7 +23,7 @@ public class GeneralConfigsPanel extends JPanel{
 	RadioButtonsPanel stratificationPanel;
 
 
-	public GeneralConfigsPanel(MConfigurations configs){
+	public GeneralConfigsPanel(MConfigs configs){
 		TitledBorder titledBorder = BorderFactory.createTitledBorder("General Configurations");
 		this.setBorder(titledBorder);
 		this.setLayout(new GridLayout(2,1));
@@ -63,13 +63,13 @@ public class GeneralConfigsPanel extends JPanel{
 	
 
 	
-	public MConfigurations getGeneralConfigs(MConfigurations configs){
-		if (configs == null) configs = new MConfigurations();	
+	public MConfigs getGeneralConfigs(MConfigs configs){
+		if (configs == null) configs = new MConfigs();	
 		//String value = systemNameTf.getText();
 		if(stratificationPanel.getLeftRadioButton().isSelected()) configs.useStratification(true);
 		else configs.useStratification(false);
 		//configs.getDBConfigs().setTable(value);
-		configs.setExecutionMode(getExecutionMode());
+		configs.getTimeConfigs().setExecutionMode(getExecutionMode());
 		//else configs.setExecutionMode(false);
 		
 		return configs;
@@ -99,8 +99,8 @@ public class GeneralConfigsPanel extends JPanel{
 		}
 	}
 	
-	public void setGeneralConfigs(MConfigurations configs){
-		setExecutionMode(configs.getExecutionMode());
+	public void setGeneralConfigs(MConfigs configs){
+		setExecutionMode(configs.getTimeConfigs().getExecutionMode());
 		if(configs.useStratification()){
 			this.stratificationPanel.getLeftRadioButton().setSelected(true);
 			this.stratificationPanel.getRightRadioButton().setSelected(false);

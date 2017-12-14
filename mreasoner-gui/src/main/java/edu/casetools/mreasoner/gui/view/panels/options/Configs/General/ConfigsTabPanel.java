@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+
+
 
 
 
@@ -17,13 +19,9 @@ public class ConfigsTabPanel extends JPanel{
 
 	FilePathsPanel filePathPanel;
 	
-	public ConfigsTabPanel(MConfigurations configs){
+	public ConfigsTabPanel(MConfigs configs){
 		this.setLayout( new GridLayout(3,1) );
-		//buttonPanel = new JPanel();	
-		
-		//timePanel = new JPanel(new BorderLayout());
-        filePathPanel = new FilePathsPanel(configs);
-
+        filePathPanel = new FilePathsPanel(configs.getFilesConfigs());
 		timeConfigs    = new TimeConfigsPanel(configs);
 		generalConfigs = new GeneralConfigsPanel(configs);
 		
@@ -44,11 +42,11 @@ public class ConfigsTabPanel extends JPanel{
 		return generalConfigs;
 	}
 	
-	public MConfigurations getConfigs(){
-		MConfigurations configs = new MConfigurations();
+	public MConfigs getConfigs(){
+		MConfigs configs = new MConfigs();
 		configs = generalConfigs.getGeneralConfigs(configs);
 		configs = timeConfigs.getTimeConfigs(configs);
-		configs = filePathPanel.getPathConfigs(configs);
+		configs.setFilesConfigs(filePathPanel.getPathConfigs(configs.getFilesConfigs()));
 		return configs;
 	}
 	
@@ -56,10 +54,10 @@ public class ConfigsTabPanel extends JPanel{
 		this.generalConfigs.addActionListener(actionListener);
 	}
 	
-	public void setConfigs(MConfigurations configs) {
+	public void setConfigs(MConfigs configs) {
 		generalConfigs.setGeneralConfigs(configs);
 		timeConfigs.setTimeConfigs(configs);
-		filePathPanel.setPathConfigs(configs);
+		filePathPanel.setPathConfigs(configs.getFilesConfigs());
 	}
 	
 	public FilePathsPanel getFilePathsPanel(){

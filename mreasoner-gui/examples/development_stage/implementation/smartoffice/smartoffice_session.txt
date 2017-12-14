@@ -1,9 +1,9 @@
-<EXECUTION_MODE>  
-REAL_ENVIRONMENT
-</EXECUTION_MODE> 
 <USE_STRATIFICATION> 
 false
 </USE_STRATIFICATION> 
+<EXECUTION_MODE>  
+REAL_ENVIRONMENT
+</EXECUTION_MODE> 
 <USE_FIXED_ITERATION_TIME> 
 false
 </USE_FIXED_ITERATION_TIME> 
@@ -28,6 +28,9 @@ examples\lfpubs\lfpubs_output.txt
 <SESSION_FILE_PATH> 
 examples\development_stage\implementation\smartoffice\smartoffice_session.txt
 </SESSION_FILE_PATH> 
+<SSH_CONFIGS_FILE_PATH> 
+examples\development_stage\implementation\smartoffice\ssh_configs.txt
+</SSH_CONFIGS_FILE_PATH> 
 <DATABASE_TYPE> 
 PostgreSQL
 </DATABASE_TYPE> 

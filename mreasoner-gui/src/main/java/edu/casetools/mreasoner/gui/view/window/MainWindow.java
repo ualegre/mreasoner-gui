@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.mreasoner.gui.view.panels.MainPanel;
 
 
@@ -14,16 +14,16 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private MainPanel mainPanel;
 
-	public MainWindow(MConfigurations configs) {
+	public MainWindow(MConfigs configs) {
 		mainPanel = new MainPanel(configs);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setContentPane(mainPanel);
 		
 		new Console(this);
-		this.setWindowConfigs(configs);
+		this.setWindowConfigs();
 	}
 	
-	private void setWindowConfigs(MConfigurations configs){
+	private void setWindowConfigs(){
 		this.setTitle("System Specification File Editor - New File");
 		this.setWindowBounds();
 		//

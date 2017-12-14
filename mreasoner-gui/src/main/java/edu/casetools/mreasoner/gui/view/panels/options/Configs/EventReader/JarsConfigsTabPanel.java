@@ -9,7 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+
 
 public class JarsConfigsTabPanel extends JPanel{
 
@@ -19,7 +20,7 @@ public class JarsConfigsTabPanel extends JPanel{
 	JScrollPane scrollPane;
 
 	
-	public JarsConfigsTabPanel(MConfigurations configs){
+	public JarsConfigsTabPanel(MConfigs configs){
 		 TitledBorder titledBorder = BorderFactory.createTitledBorder("Jar Configurations");
 		 scrollPane = new JScrollPane();
 		 
@@ -39,15 +40,15 @@ public class JarsConfigsTabPanel extends JPanel{
 	
 	
 	
-	public MConfigurations getJarConfigs(MConfigurations configs){
-		if (configs == null) configs = new MConfigurations();	
+	public MConfigs getJarConfigs(MConfigs configs){
+		if (configs == null) configs = new MConfigs();	
 		configs.setJarConfigs(jarCommandsTf.getText());
 
 		return configs;
 	}
 	
 	
-	public void setJarConfigs(MConfigurations configs){
+	public void setJarConfigs(MConfigs configs){
 		this.jarCommandsTf.setText(configs.getJarConfigs());
 	}
 	

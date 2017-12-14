@@ -9,7 +9,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+
 
 
 
@@ -29,7 +30,7 @@ public class MainMenu extends JMenuBar{
 
 
 	
-	public MainMenu(MConfigurations configs){
+	public MainMenu(MConfigs configs){
         
        fileMenu        			= new JMenu("Main Menu");
 	   systemSpecificationMenu  = new JMenu("System Specification File");
@@ -254,8 +255,8 @@ public class MainMenu extends JMenuBar{
 //		 }else return null;
 //	}
 	
-	public String displayFileChooser(String actualPath,FILECHOOSER type, FILETYPE extension){
-		fileChooser = new JFileChooser(actualPath);
+	public String displayFileChooser(String currentDirectory,FILECHOOSER type, FILETYPE extension){
+		fileChooser = new JFileChooser(currentDirectory);
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fileChooser.setFileFilter(getFileFilter(extension));
 		int fileChooserVal = showFileChooser(type);

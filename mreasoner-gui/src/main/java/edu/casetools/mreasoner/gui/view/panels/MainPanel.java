@@ -9,8 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.core.configs.MConfigurations.EXECUTION_MODE;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.mreasoner.gui.view.panels.main.DatabasePanel;
 import edu.casetools.mreasoner.gui.view.panels.main.SystemSpecificationEditorPanel;
 import edu.casetools.mreasoner.gui.view.panels.main.TranslationsPanel;
@@ -33,23 +32,23 @@ public class MainPanel extends JPanel {
 	private DatabaseConfigsTabPanel databaseConfigsTabPanel;
 	private JarsConfigsTabPanel jarsConfigsPanel;
 
-	public MainPanel(MConfigurations configs) {
+	public MainPanel(MConfigs configs) {
 
 		menu 						   = new MainMenu(configs);
 		configsPanel 				   = new ConfigsTabPanel(configs);
 		systemSpecificationEditorPanel = new SystemSpecificationEditorPanel();
 		translataionsPanel   		   = new TranslationsPanel();
-		databasePanel 				   = new DatabasePanel(configs);
+		databasePanel 				   = new DatabasePanel(configs.getTimeConfigs());
 //		sensorMappingPanel 			   = new SensorMappingPanel();
 //		actuatorMappingPanel 		   = new SensorMappingPanel();
-		databaseConfigsTabPanel    	   = new DatabaseConfigsTabPanel(configs);
+		databaseConfigsTabPanel    	   = new DatabaseConfigsTabPanel(configs.getDBConfigs());
 		jarsConfigsPanel 	   = new JarsConfigsTabPanel(configs);
 		
 		createLeftTabbedPane(configs);
 		createRightTabbedPane(configs);
 		createMainSplitPanel();
 		
-		configureExecutionMode(configs.getExecutionMode());
+//		configureExecutionMode(configs.getTimeConfigs().getExecutionMode());
 		
 		this.setLayout(new BorderLayout());
 		this.add(mainSplitPane, BorderLayout.CENTER);
@@ -67,7 +66,7 @@ public class MainPanel extends JPanel {
 		mainSplitPane.setEnabled(false);
 	}
 
-	private void createLeftTabbedPane(MConfigurations configs) {
+	private void createLeftTabbedPane(MConfigs configs) {
 		leftTabbedPane = new JTabbedPane();
 
 		leftTabbedPane.setFocusable(false);
@@ -79,22 +78,22 @@ public class MainPanel extends JPanel {
 		leftTabbedPane.setEnabledAt(2, false);
 	}
 	
-	public void configureExecutionMode(EXECUTION_MODE mode){
-		switch(mode){
-		case REAL_ENVIRONMENT:
-			break;
-		case SIMULATION_ITERATION:
-			break;
-		case SIMULATION_REAL_TIME:
-			break;
-		default:
-			break;
-		
-		}
-	}
+//	public void configureExecutionMode(EXECUTION_MODE mode){
+//		switch(mode){
+//		case REAL_ENVIRONMENT:
+//			break;
+//		case SIMULATION_ITERATION:
+//			break;
+//		case SIMULATION_REAL_TIME:
+//			break;
+//		default:
+//			break;
+//		
+//		}
+//	}
 	
 
-	private void createRightTabbedPane(MConfigurations configs) {
+	private void createRightTabbedPane(MConfigs configs) {
 		rightTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		rightTabbedPane.addTab("System Specification File Editor", systemSpecificationEditorPanel);
 		rightTabbedPane.addTab("Database Results", databasePanel);
@@ -185,7 +184,7 @@ public class MainPanel extends JPanel {
 		return this.rightTabbedPane;
 	}
 
-	public void setConfigs(MConfigurations configs) {
+	public void setConfigs(MConfigs configs) {
 		
 		configsPanel.setConfigs(configs);
 		databaseConfigsTabPanel.setDBConfigs(configs.getDBConfigs());

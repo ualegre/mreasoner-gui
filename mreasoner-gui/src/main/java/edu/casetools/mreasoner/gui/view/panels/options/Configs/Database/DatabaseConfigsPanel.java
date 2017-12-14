@@ -15,9 +15,9 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.core.configs.MDBConfigs;
-import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
+import edu.casetools.icase.mreasoner.database.core.connection.DBConnection.STATUS;
 import edu.casetools.mreasoner.gui.view.panels.utils.SpringUtilities;
 
 
@@ -33,7 +33,7 @@ public class DatabaseConfigsPanel extends JPanel{
 	JPanel dbConfigsPanel,buttonPanel;
 
 	
-	public DatabaseConfigsPanel(MConfigurations configs){
+	public DatabaseConfigsPanel(MDBConfigs configs){
 
 		TitledBorder titledBorder = BorderFactory.createTitledBorder("Database Configurations");
 		
@@ -45,7 +45,7 @@ public class DatabaseConfigsPanel extends JPanel{
 		this.setLayout(new GridLayout(1,0));
         dbConfigsPanel.setBorder(titledBorder);
         this.add(dbConfigsPanel);
-        this.setDBConfigs(configs.getDBConfigs());
+        this.setDBConfigs(configs);
 	
 	}
 	
@@ -124,8 +124,8 @@ public class DatabaseConfigsPanel extends JPanel{
         conectionStatusLabel.setLabelFor(conectionStatus);
 	}
 	@SuppressWarnings("deprecation")
-	public MConfigurations getDBConfigs(MConfigurations configs) {
-		if (configs == null) configs = new MConfigurations();	
+	public MConfigs getDBConfigs(MConfigs configs) {
+		if (configs == null) configs = new MConfigs();	
 		String value = comboBox.getItemAt(comboBox.getSelectedIndex());
 		configs.getDBConfigs().setDbType(value);
 

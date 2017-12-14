@@ -1,6 +1,6 @@
 package edu.casetools.mreasoner.gui.controller;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.files.FilesConfigs;
 import edu.casetools.mreasoner.gui.controller.listeners.ConfigsListener;
 import edu.casetools.mreasoner.gui.controller.listeners.IterationTimeRadioButtonListener;
 import edu.casetools.mreasoner.gui.controller.listeners.MainMenuListener;
@@ -25,7 +25,7 @@ public class Controller {
 	TabbedPaneListener tabbedPaneListener;
 
 
-	public Controller(View view, Model model,MConfigurations configs){
+	public Controller(View view, Model model, FilesConfigs configs){
 		//STATUS status;
 		this.view 	 = view;
 		this.model   = model;
@@ -49,13 +49,13 @@ public class Controller {
 		setDividersAtDefaultLocation();
 
 	}
-	private void setFileOfConfigs(MConfigurations configs) {
+	private void setFileOfConfigs(FilesConfigs configs) {
 		if(configs.existsConfigsFilePath()){
 			view.getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(configs.getSessionFilePath());
 		}
 		
 	}
-	private void setFileOfLog(MConfigurations configs) {
+	private void setFileOfLog(FilesConfigs configs) {
 		if(configs.existsLogFilePath()){
 			view.getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setResultsPath(configs.getResultsFilePath());
 		}
@@ -66,7 +66,7 @@ public class Controller {
 		configsListener.refresh();
 	}
 	
-	private void setFileOfLFPUBSRuleTranslationEditor(MConfigurations configs) {
+	private void setFileOfLFPUBSRuleTranslationEditor(FilesConfigs configs) {
 		if(configs.existsLFPUBSOutputFile()){
 			String content = "";
 	//		String content = model.getTesterModel().read(configs.getLFPUBSOutputFilePath());
@@ -84,7 +84,7 @@ public class Controller {
 	}
 	
 	
-	private void setFileOfSystemSpecificationEditor(MConfigurations configs) {
+	private void setFileOfSystemSpecificationEditor(FilesConfigs configs) {
 		if(configs.existsSystemDeclarationFile()){
 			String content = "";
 			//String content = model.getTesterModel().read(configs.getSystemDeclarationFilePath());
@@ -127,8 +127,5 @@ public class Controller {
 	public void setState(STATE state) {
 		this.state = state;
 	}
-	
-	
-	
 	
 }

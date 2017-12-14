@@ -13,8 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.core.configs.MDBConfigs;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 import edu.casetools.mreasoner.gui.view.panels.utils.SpringUtilities;
 
 
@@ -33,8 +33,8 @@ public class DatabaseCreationPanel extends JPanel {
 
 	}
 	
-	public DatabaseCreationPanel(MConfigurations configs) {
-		this.initializeElements(configs);
+	public DatabaseCreationPanel(String dbName) {
+		this.initializeElements(dbName);
 		this.addElements();
         SpringUtilities.makeCompactGrid(mainPanel,
         2, 2, 		  //rows, cols
@@ -46,7 +46,7 @@ public class DatabaseCreationPanel extends JPanel {
 
 	}
 
-	private void initializeElements(MConfigurations configs){
+	private void initializeElements(String dbName){
 		titledBorder	  = BorderFactory.createTitledBorder("Create/Drop Database");
 		nameLabel 		  = new JLabel("Database name: ");
 		statusLabelTitle  = new JLabel("Status: ");
@@ -58,7 +58,7 @@ public class DatabaseCreationPanel extends JPanel {
 		dropButton 		  = new JButton("Drop");
 		dropButton.setFocusable(false);
 		nameTf    		  = new JTextField(20);
-		nameTf.setText(configs.getDBConfigs().getDbName());
+		nameTf.setText(dbName);
 		mainPanel         = new JPanel(new SpringLayout());
 		buttonPanel       = new JPanel(new GridLayout(1,3));
 	}
@@ -78,7 +78,7 @@ public class DatabaseCreationPanel extends JPanel {
 		this.nameTf.setText(configs.getDbName());
 	}
 
-	public MConfigurations getDBConfigs(MConfigurations configs) {
+	public MConfigs getDBConfigs(MConfigs configs) {
 
 		configs.getDBConfigs().setDbName(nameTf.getText());
 

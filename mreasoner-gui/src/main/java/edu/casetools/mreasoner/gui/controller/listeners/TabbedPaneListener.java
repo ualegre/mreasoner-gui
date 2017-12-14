@@ -3,9 +3,9 @@ package edu.casetools.mreasoner.gui.controller.listeners;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
-import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
+import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs;
+import edu.casetools.icase.mreasoner.database.core.connection.DBConnection.STATUS;
+import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.gui.controller.Controller;
 import edu.casetools.mreasoner.gui.view.panels.models.Models.EventsTableModel;
 import edu.casetools.mreasoner.gui.view.panels.models.Models.InternalEventsTableModel;
@@ -100,7 +100,7 @@ public class TabbedPaneListener implements MouseListener{
 	}
 	
 	private void updateTableModels(DatabaseOperations con){
-		MConfigurations configs = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs();
+		TimeConfigs configs = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs().getTimeConfigs();
 		SensorsTableModel stm = new SensorsTableModel();
 		stm.updateTable(con);
 		ResultsTableModel rtm = new ResultsTableModel();

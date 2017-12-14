@@ -1,38 +1,40 @@
 package edu.casetools.mreasoner.gui.model;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.database.core.MDBImplementations;
-import edu.casetools.mreasoner.database.core.MDBImplementations.DB_IMPLEMENTATION;
-import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
-import edu.casetools.mreasoner.database.core.operations.DatabaseOperationsFactory;
+import java.util.Vector;
+
+import edu.casetools.icase.mreasoner.configs.MConfigsLoader;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
+import edu.casetools.icase.mreasoner.database.core.MDBImplementations;
+import edu.casetools.icase.mreasoner.database.core.MDBImplementations.DB_IMPLEMENTATION;
+import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
+import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperationsFactory;
+import edu.casetools.icase.mreasoner.deployment.Launcher;
+import edu.casetools.icase.mreasoner.learning.LFPUBSTranslatorWrapper;
+import edu.casetools.icase.mreasoner.vera.actuators.device.Actuator;
+import edu.casetools.icase.mreasoner.verification.NuSMVExportManager;
 import edu.casetools.mreasoner.gui.model.io.IOManager;
-import edu.casetools.mreasoner.gui.model.io.lfpubs.LFPUBSTranslatorWrapper;
-import edu.casetools.mreasoner.gui.model.io.mconfigs.ConfigsReaderWrapper;
-import edu.casetools.mreasoner.gui.model.io.nusmv.ExportManager;
-import edu.casetools.mreasoner.utils.Launcher;
-
-
-//import Translator.Translator;
-
 
 public class Model {
 
 	private IOManager   			 testerModel;
 	private Launcher 				 reasonerModel;
     private LFPUBSTranslatorWrapper  lfpubsTranslModel;
-	private ExportManager 			 exporterModel;
+	private NuSMVExportManager 		 exporterModel;
 	private DatabaseOperations  	 dbOperations;
-	private ConfigsReaderWrapper     configsReader;
+	private MConfigsLoader     		 configsReader;
+	private Vector<Actuator> 		 actuators;
 
 	
-	public Model(MConfigurations configs){
+	public Model(MDBConfigs configs, Vector<Actuator> actuators){
+		this.actuators 	  = actuators;
 		testerModel 	  = new IOManager();
-		exporterModel 	  = new ExportManager();
+		exporterModel 	  = new NuSMVExportManager();
 		lfpubsTranslModel = new LFPUBSTranslatorWrapper();
-		configsReader 	  = new ConfigsReaderWrapper();
+		configsReader 	  = new MConfigsLoader();
 		if(configs != null){
 			dbOperations  = DatabaseOperationsFactory.getDatabaseOperations(
-					DB_IMPLEMENTATION.POSTGRESQL,configs.getDBConfigs());
+					DB_IMPLEMENTATION.POSTGRESQL,configs);
 		}
 		
 	}
@@ -53,28 +55,30 @@ public class Model {
 		return this.lfpubsTranslModel;
 	}
 	
-	public void createDatabaseConnection(MConfigurations configs){
+	public void createDatabaseConnection(MConfigs configs){
 		MDBImplementations.DB_IMPLEMENTATION implementation = MDBImplementations.DB_IMPLEMENTATION.valueOf(configs.getDBConfigs().getDbType().toUpperCase());
 		dbOperations = DatabaseOperationsFactory.getDatabaseOperations(implementation,configs.getDBConfigs());
 	}
 	
-	public ConfigsReaderWrapper getConfigsReader(){
+	public MConfigsLoader getConfigsReader(){
 		return this.configsReader;
 	}
 	
-	public ExportManager getExporterModel(){
+	public NuSMVExportManager getExporterModel(){
 		return this.exporterModel;
 	}
 
 	public void startReasoner(String configFileName) {
-		reasonerModel = new Launcher();
-		reasonerModel.readMSpecification(configFileName);
+		reasonerModel = new Launcher(actuators);
+		reasonerModel.readMSpecification(reasonerModel.readMConfigs(configFileName));
 		reasonerModel.start();
 	}
 	
 	public void stopReasoner() {
 		try {
 			reasonerModel.terminate();
+			if(!reasonerModel.isInterrupted())
+				reasonerModel.interrupt();
 			reasonerModel.join();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.table.DefaultTableModel;
 
-import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
+import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 
 public abstract class DefaultModel extends DefaultTableModel{
 

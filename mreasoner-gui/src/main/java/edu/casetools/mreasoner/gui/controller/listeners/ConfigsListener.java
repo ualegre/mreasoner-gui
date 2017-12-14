@@ -3,10 +3,11 @@ package edu.casetools.mreasoner.gui.controller.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.core.configs.MConfigurations.EXECUTION_MODE;
-import edu.casetools.mreasoner.database.core.connection.DBConnection.STATUS;
-import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs;
+import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs.EXECUTION_MODE;
+import edu.casetools.icase.mreasoner.database.core.connection.DBConnection.STATUS;
+import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.gui.controller.Controller;
 import edu.casetools.mreasoner.gui.view.panels.models.Models.EventsTableModel;
 import edu.casetools.mreasoner.gui.view.panels.models.Models.InternalEventsTableModel;
@@ -137,8 +138,8 @@ public class ConfigsListener implements ActionListener{
 	}
 
 	private boolean checkDatabase() {
-		MConfigurations configs = controller.getView().getMainWindow().getMainPanel()
-		.getDatabaseConfigsTabPanel().getDatabaseCreationPanel().getDBConfigs(new MConfigurations());
+		MConfigs configs = controller.getView().getMainWindow().getMainPanel()
+		.getDatabaseConfigsTabPanel().getDatabaseCreationPanel().getDBConfigs(new MConfigs());
 		boolean exists = controller.getModel().getDBConnection().databaseExists(configs.getDBConfigs().getDbName());	
 		controller.getView().getMainWindow().getMainPanel()
 				.getDatabaseConfigsTabPanel().getDatabaseCreationPanel().setStatus(exists); 
@@ -149,7 +150,7 @@ public class ConfigsListener implements ActionListener{
 
 	private void dropDatabase() {
 		DatabaseOperations con = controller.getModel().getDBConnection();
-		MConfigurations configs;
+		MConfigs configs;
 		if(this.checkDatabase()){
 			if(con.checkConnection() == STATUS.CONNECTED){
 				con.disconnect();
@@ -163,7 +164,7 @@ public class ConfigsListener implements ActionListener{
 
 	private void createDatabase() {
 		DatabaseOperations con = controller.getModel().getDBConnection();
-		MConfigurations configs;
+		MConfigs configs;
 		if(con.checkConnection() == STATUS.CONNECTED){
 			con.disconnect();
 		}
@@ -239,7 +240,7 @@ public class ConfigsListener implements ActionListener{
 
 	public void refresh() {
 		STATUS status;  // TODO Auto-generated method stub
-		MConfigurations configs = getConfigs();
+		MConfigs configs = getConfigs();
 			DatabaseOperations con = controller.getModel().getDBConnection();
 		    
 			if((con.getDBConnection() != null)&& con.getDBConnection().isConnected() ){
@@ -263,7 +264,7 @@ public class ConfigsListener implements ActionListener{
 	}
 	
 	private void updateTableModels(DatabaseOperations con){
-		MConfigurations configs = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs();
+		TimeConfigs configs = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs().getTimeConfigs();
 		SensorsTableModel stm = new SensorsTableModel();
 		stm.updateTable(con);
 		ResultsTableModel rtm = new ResultsTableModel();
@@ -279,18 +280,18 @@ public class ConfigsListener implements ActionListener{
 //		controller.getView().getMainWindow().getMainPanel().getSensorMappingPanel().getMappingPanel().getTable().setModel(stm);
 	}
 
-	private MConfigurations getConfigs(){
-			MConfigurations configs = 
+	private MConfigs getConfigs(){
+			MConfigs configs = 
 					controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs();
 			configs = 
 					controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getDBConfigs(configs);	
 			configs = 
 					controller.getView().getMainWindow().getMainPanel().getEventReaderConfigsPanel().getJarConfigs(configs);
-			configs.setSystemSpecificationFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath());
-			configs.setSessionFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath());
+			configs.getFilesConfigs().setSystemSpecificationFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath());
+			configs.getFilesConfigs().setSessionFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath());
 			//System.out.println("CONFIGS PATH "+configs.getConfigsFilePath()+" - "+controller.getView().getMainWindow().getMainPanel().getMainMenu().getConfigsPath());
-			configs.setResultsFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getResultsPath());
-			configs.setLFPUBSOutputFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath());
+			configs.getFilesConfigs().setResultsFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getResultsPath());
+			configs.getFilesConfigs().setLFPUBSOutputFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath());
 			return configs;
 	}
 

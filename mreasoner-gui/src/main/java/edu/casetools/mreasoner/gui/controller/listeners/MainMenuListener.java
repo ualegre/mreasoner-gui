@@ -4,7 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.configs.data.files.FilesConfigs;
 import edu.casetools.mreasoner.gui.controller.Controller;
 import edu.casetools.mreasoner.gui.view.panels.menu.MainMenu.FILECHOOSER;
 import edu.casetools.mreasoner.gui.view.panels.menu.MainMenu.FILETYPE;
@@ -41,43 +42,45 @@ public class MainMenuListener implements ActionListener {
 	}
 	
 	private void exportToNuSMV() {
-		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath();
+		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath();
 		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.SAVE, FILETYPE.SMV);//controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().displaySaveConfigsFileChooser();
 		
 		if(file != null){			
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(file);
-			MConfigurations configs = getSystemConfigs();
+			MConfigs configs = getSystemConfigs();
 			controller.getModel().getExporterModel().export(file,configs);		
 		}
 		
 	}
 
 	private void saveConfigurationsButtonAs() {
-		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath();
+		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath();
 		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.SAVE, FILETYPE.CONF);//controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().displaySaveConfigsFileChooser();
 		
 		if(file != null){
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(file);
-			MConfigurations configs = getSystemConfigs();
+			FilesConfigs configs = getSystemConfigs().getFilesConfigs();
 			configs.setSessionFilePath(file);
-			controller.getModel().getTesterModel().writeFile(configs.getSessionFilePath(), configs.getConfigsInString());		
+			controller.getModel().getTesterModel().writeFile(configs.getSessionFilePath(), configs.parseConfigs());		
 			controller.getView().getMainWindow().getMainPanel().getMainMenu().enableConfigurationButtons(true);
 		}
 		
 	}
 
 	private void loadConfigurationsButton() {
-		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath();
+		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath();
+		if(configsPath.equals(""))
+			configsPath = ".\\examples\\development_stage";
 		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.OPEN, FILETYPE.CONF);
 		controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().setText("");
 		if(file != null){
-			MConfigurations configs = controller.getModel().getConfigsReader().readConfigs(file);
+			MConfigs configs = controller.getModel().getConfigsReader().readConfigs(file);
 			if(configs!=null){
 				controller.getView().getMainWindow().getMainPanel().setConfigs(configs);
 				controller.getView().getMainWindow().getMainPanel().getMainMenu().enableConfigurationButtons(true);
 				controller.loadConfigs();
-				this.loadLFPUBSFileView(configs.getLFPUBSOutputFilePath());
-				loadSystemSpecificationFileView(configs.getSystemSpecificationFilePath());
+				this.loadLFPUBSFileView(configs.getFilesConfigs().getLFPUBSOutputFilePath());
+				loadSystemSpecificationFileView(configs.getFilesConfigs().getSystemSpecificationFilePath());
 				controller.setDividersAtDefaultLocation();
 			}
 			
@@ -86,7 +89,7 @@ public class MainMenuListener implements ActionListener {
 	}
 
 	private void newConfigurationsButton() {
-		MConfigurations configs = new MConfigurations();
+		MConfigs configs = new MConfigs();
 		controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().setText("");
 		controller.getView().getMainWindow().getMainPanel().setConfigs(configs);
 		controller.getView().getMainWindow().getMainPanel().getMainMenu().enableConfigurationButtons(false);
@@ -94,8 +97,8 @@ public class MainMenuListener implements ActionListener {
 	}
 	
 	private void saveConfigurationsButton(){
-		MConfigurations configs = getSystemConfigs();
-		controller.getModel().getTesterModel().writeFile(configs.getSessionFilePath(), configs.getConfigsInString());		
+		MConfigs configs = getSystemConfigs();
+		controller.getModel().getTesterModel().writeFile(configs.getFilesConfigs().getSessionFilePath(), configs.parseConfigs());		
 	}
 
 	private void clearTab() {
@@ -148,9 +151,9 @@ public class MainMenuListener implements ActionListener {
 	}
 
 
-	private MConfigurations saveConfigurations(){
-		MConfigurations configs = this.getSystemConfigs();
-		controller.getModel().getTesterModel().writeFile(configs.getSessionFilePath(), configs.getConfigsInString());
+	private MConfigs saveConfigurations(){
+		MConfigs configs = this.getSystemConfigs();
+		controller.getModel().getTesterModel().writeFile(configs.getFilesConfigs().getSessionFilePath(), configs.parseConfigs());
 		return configs;
 	}
 	
@@ -193,7 +196,7 @@ public class MainMenuListener implements ActionListener {
 	private void startButtonAction() {
 		
 
-		MConfigurations configs = this.saveConfigurations();
+		MConfigs configs = this.saveConfigurations();
 		this.saveButtonAction();
 		if(controller.getView().getMainWindow().getMainPanel().getRightTabbedPane().getSelectedIndex() != 1)
 			controller.getView().getMainWindow().getMainPanel().getRightTabbedPane().setSelectedIndex(0);
@@ -202,7 +205,7 @@ public class MainMenuListener implements ActionListener {
 			controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().setText("");
 			controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().refreshMidPanel();
 			controller.getView().getMainWindow().getMainPanel().getMainMenu().enableStopButton(true);
-			controller.getModel().startReasoner(configs.getSessionFilePath());
+			controller.getModel().startReasoner(configs.getFilesConfigs().getSessionFilePath());
 			controller.getView().getMainWindow().getMainPanel().getMainMenu().enableSaveResultsLogAs();
 
 		
@@ -217,9 +220,6 @@ public class MainMenuListener implements ActionListener {
 
 	}
 	
-
-
-
 	private void saveAsButtonAction() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath();
 		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.SAVE, FILETYPE.MTPL);
@@ -278,18 +278,18 @@ public class MainMenuListener implements ActionListener {
 
 
 	
-	private MConfigurations getSystemConfigs(){
-		MConfigurations configs = 
+	private MConfigs getSystemConfigs(){
+		MConfigs configs = 
 				controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs();
 		configs = 
 				controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getDBConfigs(configs);	
 		configs = 
 				controller.getView().getMainWindow().getMainPanel().getEventReaderConfigsPanel().getJarConfigs(configs);
-		configs.setSystemSpecificationFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath());
-		configs.setSessionFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getConfigsPath());
+		configs.getFilesConfigs().setSystemSpecificationFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath());
+		configs.getFilesConfigs().setSessionFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath());
 		//System.out.println("CONFIGS PATH "+configs.getConfigsFilePath()+" - "+controller.getView().getMainWindow().getMainPanel().getMainMenu().getConfigsPath());
-		configs.setResultsFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getResultsPath());
-		configs.setLFPUBSOutputFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath());
+		configs.getFilesConfigs().setResultsFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getResultsPath());
+		configs.getFilesConfigs().setLFPUBSOutputFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath());
 		return configs;
 	}
 	

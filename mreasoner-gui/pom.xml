@@ -55,21 +55,16 @@
 		
 		<dependency>
 		    <groupId>com.github.ualegre</groupId>
-		    <artifactId>lfpubs2m</artifactId>
-		    <version>v0.0.2</version>
+		    <artifactId>mreasoner-core</artifactId>
+		    <version>f55f4c0f94</version>
 		</dependency>
 		
 		<dependency>
 		    <groupId>com.github.ualegre</groupId>
-		    <artifactId>vera_log_reader</artifactId>
-		    <version>v0.2.1</version>
+		    <artifactId>vera-manager</artifactId>
+		    <version>73131a4246</version>
 		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.ualegre</groupId>
-		    <artifactId>m2nusmv</artifactId>
-		    <version>v0.2.6</version>
-		</dependency>
+	
 				
 	</dependencies>
     

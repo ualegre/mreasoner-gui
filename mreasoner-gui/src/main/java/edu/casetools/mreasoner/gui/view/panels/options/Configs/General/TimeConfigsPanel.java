@@ -10,8 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
-import edu.casetools.mreasoner.core.configs.MConfigurations.EXECUTION_MODE;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs.EXECUTION_MODE;
 import edu.casetools.mreasoner.gui.view.panels.options.Panels.RadioButtonsPanel;
 import edu.casetools.mreasoner.gui.view.panels.utils.SpringUtilities;
 
@@ -22,7 +22,7 @@ public class TimeConfigsPanel extends JPanel{
 	JTextField timeUnitTf,executionTimeTf;
 	RadioButtonsPanel iterationTimeRB,relativeTimeRB;
 	
-	public TimeConfigsPanel(MConfigurations configs){
+	public TimeConfigsPanel(MConfigs configs){
 		TitledBorder titledBorder = BorderFactory.createTitledBorder("Time Configurations");
 		this.setBorder(titledBorder);
 		this.setLayout(new BorderLayout());
@@ -96,19 +96,19 @@ public class TimeConfigsPanel extends JPanel{
 		}
 	}
 	
-	public MConfigurations getTimeConfigs(MConfigurations configs){	
+	public MConfigs getTimeConfigs(MConfigs configs){	
 		
-		if(iterationTimeRB.getLeftRadioButton().isSelected()) configs.setUseFixedIterationTime(true);
-		else configs.setUseFixedIterationTime(false);
+		if(iterationTimeRB.getLeftRadioButton().isSelected()) configs.getTimeConfigs().setUseFixedIterationTime(true);
+		else configs.getTimeConfigs().setUseFixedIterationTime(false);
 		
 		if(relativeTimeRB.getLeftRadioButton().isSelected()) configs.setUseMaxExecutionTime(true);
 		else configs.setUseMaxExecutionTime(false);
 		
 		String value = executionTimeTf.getText();
-		configs.setExecutionTime(Long.parseLong(value));
+		configs.getTimeConfigs().setExecutionTime(Long.parseLong(value));
 
 		value = timeUnitTf.getText();
-		configs.setTimeUnit(Long.parseLong(value));
+		configs.getTimeConfigs().setTimeUnit(Long.parseLong(value));
 
 		return configs;
 	}
@@ -124,11 +124,11 @@ public class TimeConfigsPanel extends JPanel{
 	}
 
 	
-	public void setTimeConfigs(MConfigurations configs){
-		timeUnitTf.setText(""+configs.getTimeUnit());
-		executionTimeTf.setText(""+configs.getExecutionTime());
-		iterationTimeRB.setValue(configs.isFixedIterationTime());
-		if(configs.isFixedIterationTime()) timeUnitTf.setEditable(true);
+	public void setTimeConfigs(MConfigs configs){
+		timeUnitTf.setText(""+configs.getTimeConfigs().getTimeUnit());
+		executionTimeTf.setText(""+configs.getTimeConfigs().getExecutionTime());
+		iterationTimeRB.setValue(configs.getTimeConfigs().isFixedIterationTime());
+		if(configs.getTimeConfigs().isFixedIterationTime()) timeUnitTf.setEditable(true);
 		else timeUnitTf.setEditable(false);
 		relativeTimeRB.setValue(configs.useMaxExecutionTime());
 		if(configs.useMaxExecutionTime()) executionTimeTf.setEditable(true);

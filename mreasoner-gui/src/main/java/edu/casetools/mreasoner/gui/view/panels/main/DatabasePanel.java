@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs;
 import edu.casetools.mreasoner.gui.view.panels.models.Models.EventsTableModel;
 import edu.casetools.mreasoner.gui.view.panels.models.Models.InternalEventsTableModel;
 import edu.casetools.mreasoner.gui.view.panels.models.Models.ResultsTableModel;
@@ -26,7 +26,7 @@ public class DatabasePanel extends JPanel{
 	InternalEventsTableModel internalEventsModel;
 	JTable table;
 	
-	public DatabasePanel(MConfigurations configs){
+	public DatabasePanel(TimeConfigs configs){
 		this.setLayout(new GridLayout(3,1));
 		resultsPanel = new JPanel(new BorderLayout());
 		eventsPanel  = new JPanel(new BorderLayout());

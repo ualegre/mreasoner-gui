@@ -2,7 +2,7 @@ package edu.casetools.mreasoner.gui.view;
 
 import javax.swing.JPanel;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.mreasoner.gui.view.window.MainWindow;
 
 
@@ -14,7 +14,7 @@ public class View {
 
 	public enum PANEL {MAIN_PANEL,TEST_CASE_MGR};
 	
-	public View(MConfigurations configs){
+	public View(MConfigs configs){
 		mainWindow = new MainWindow(configs);
 		//setLookAndFeel();
 		

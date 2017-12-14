@@ -1,7 +1,7 @@
 package edu.casetools.mreasoner.gui.view.panels.models.Models;
 
 
-import edu.casetools.mreasoner.database.core.operations.DatabaseOperations;
+import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.mreasoner.gui.view.panels.models.DefaultModel;
 
 public class SensorImplementationTableModel extends DefaultModel {

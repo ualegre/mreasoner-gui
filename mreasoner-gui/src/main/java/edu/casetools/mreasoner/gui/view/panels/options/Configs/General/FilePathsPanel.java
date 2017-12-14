@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.mreasoner.core.configs.MConfigurations;
+import edu.casetools.icase.mreasoner.configs.data.files.FilesConfigs;
 import edu.casetools.mreasoner.gui.view.panels.utils.SpringUtilities;
 
 
@@ -23,7 +23,7 @@ public class FilePathsPanel extends JPanel{
 	
 	
 	
-	public FilePathsPanel(MConfigurations configs){
+	public FilePathsPanel(FilesConfigs configs){
 		 //mainPanel = new JPanel(new SpringLayout());
 		this.setLayout(new SpringLayout());
 		 TitledBorder titledBorder = BorderFactory.createTitledBorder("File Paths Configurations");
@@ -74,7 +74,7 @@ public class FilePathsPanel extends JPanel{
 		}else return "null";
 	}
 
-	public MConfigurations getPathConfigs(MConfigurations configs) {
+	public FilesConfigs getPathConfigs(FilesConfigs configs) {
 		configs.setSystemSpecificationFilePath(readNull(specificationPathLabel.getText()));
 		configs.setResultsFilePath(readNull(resultsPathLabel.getText()));
 		configs.setLFPUBSOutputFilePath(readNull(LFPUBSPathLabel.getText()));
@@ -82,7 +82,7 @@ public class FilePathsPanel extends JPanel{
 		return configs;
 	}
 	
-	public void setPathConfigs(MConfigurations configs) {
+	public void setPathConfigs(FilesConfigs configs) {
 		specificationPathLabel.setText(writeNull(configs.getSystemSpecificationFilePath()));
 		resultsPathLabel.setText(writeNull(configs.getResultsFilePath()));
 		LFPUBSPathLabel.setText(writeNull(configs.getLFPUBSOutputFilePath()));
@@ -101,7 +101,7 @@ public class FilePathsPanel extends JPanel{
 		return readNull(LFPUBSPathLabel.getText());
 	}
 	
-	public String getConfigsPath(){
+	public String getSessionPath(){
 		return readNull(configsPathLabel.getText());
 	}
 	
