@@ -26,13 +26,13 @@ public class ConfigsListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getActionCommand().equals("Refresh")) refresh();
-		else if(arg0.getActionCommand().equals("Test"))testEnvironment_Iteration();
-		else if(arg0.getActionCommand().equals("Create"))createDatabase();
-		else if(arg0.getActionCommand().equals("Drop"))dropDatabase();
-		else if(arg0.getActionCommand().equals("Check"))checkDatabase();
-		else if(arg0.getActionCommand().equals("Check Tables"))checkTables();
-		else if(arg0.getActionCommand().equals("Select All"))selectAll();
-		else if(arg0.getActionCommand().equals("Clear Selected"))clearSelected();
+		else if(arg0.getActionCommand().equals("Test")) testEnvironment_Iteration();
+		else if(arg0.getActionCommand().equals("Create")) createDatabase();
+		else if(arg0.getActionCommand().equals("Drop")) dropDatabase();
+		else if(arg0.getActionCommand().equals("Check")) checkDatabase();
+		else if(arg0.getActionCommand().equals("Check Tables")) checkTables();
+		else if(arg0.getActionCommand().equals("Select All")) selectAll();
+		else if(arg0.getActionCommand().equals("Clear Selected")) clearSelected();
 		else {
 			int selection = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getGeneralConfigsPanel().getExecutionModeComboBox().getSelectedIndex();
             switch (selection){

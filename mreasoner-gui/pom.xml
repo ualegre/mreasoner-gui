@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.casetools</groupId>
   <artifactId>mreasoner-gui</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <name>mreasoner-gui</name>
   <url>https://github.com/ualegre/mreasoner-gui/</url>
   
@@ -46,23 +46,24 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+		    <groupId>com.github.ualegre</groupId>
+		    <artifactId>mreasoner-core</artifactId>
+		    <version>v0.1.1</version>
+		</dependency>
+		
 		
 		<dependency>
 		    <groupId>com.github.ualegre</groupId>
 		    <artifactId>mreasoner</artifactId>
-		    <version>dev-SNAPSHOT</version>
+		    <version>v0.1.0</version>
 		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.ualegre</groupId>
-		    <artifactId>mreasoner-core</artifactId>
-		    <version>f55f4c0f94</version>
-		</dependency>
-		
+			
 		<dependency>
 		    <groupId>com.github.ualegre</groupId>
 		    <artifactId>vera-manager</artifactId>
-		    <version>73131a4246</version>
+		    <version>v0.2.4</version>
 		</dependency>
 	
 				

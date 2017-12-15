@@ -5,8 +5,6 @@ import java.util.Vector;
 import edu.casetools.icase.mreasoner.configs.MConfigsLoader;
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
-import edu.casetools.icase.mreasoner.database.core.MDBImplementations;
-import edu.casetools.icase.mreasoner.database.core.MDBImplementations.DB_IMPLEMENTATION;
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperationsFactory;
 import edu.casetools.icase.mreasoner.deployment.Launcher;
@@ -33,8 +31,7 @@ public class Model {
 		lfpubsTranslModel = new LFPUBSTranslatorWrapper();
 		configsReader 	  = new MConfigsLoader();
 		if(configs != null){
-			dbOperations  = DatabaseOperationsFactory.getDatabaseOperations(
-					DB_IMPLEMENTATION.POSTGRESQL,configs);
+			dbOperations  = DatabaseOperationsFactory.getDatabaseOperations( configs );
 		}
 		
 	}
@@ -56,8 +53,7 @@ public class Model {
 	}
 	
 	public void createDatabaseConnection(MConfigs configs){
-		MDBImplementations.DB_IMPLEMENTATION implementation = MDBImplementations.DB_IMPLEMENTATION.valueOf(configs.getDBConfigs().getDbType().toUpperCase());
-		dbOperations = DatabaseOperationsFactory.getDatabaseOperations(implementation,configs.getDBConfigs());
+		dbOperations = DatabaseOperationsFactory.getDatabaseOperations(configs.getDBConfigs());
 	}
 	
 	public MConfigsLoader getConfigsReader(){

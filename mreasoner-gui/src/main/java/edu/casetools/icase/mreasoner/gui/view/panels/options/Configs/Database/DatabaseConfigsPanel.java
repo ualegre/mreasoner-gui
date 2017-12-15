@@ -17,6 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
+import edu.casetools.icase.mreasoner.database.core.MDBImplementations;
 import edu.casetools.icase.mreasoner.database.core.connection.DBConnection.STATUS;
 import edu.casetools.icase.mreasoner.gui.view.panels.utils.SpringUtilities;
 
@@ -55,8 +56,8 @@ public class DatabaseConfigsPanel extends JPanel{
      	buttonPanel.setBorder(BorderFactory.createEmptyBorder(2,10,2,4));
      //	buttonPanel.add(conectionStatusLabel);
      	buttonPanel.add(conectionStatus);
-     	buttonPanel.add(connectButton);    	 
-    	comboBox.addItem("PostgreSQL");
+     	buttonPanel.add(connectButton);   
+     	
         passLabel.setLabelFor(passField);
         
         SpringUtilities.makeCompactGrid(dbConfigsPanel,
@@ -68,7 +69,7 @@ public class DatabaseConfigsPanel extends JPanel{
 
 	private void initializeElements(){
 		dbConfigsPanel 	 = new JPanel(new SpringLayout());
-    	comboBox  	 = new JComboBox<String>();
+    	comboBox  	 = new JComboBox<String>(MDBImplementations.getNames());
 					initJLabels();
 					initTextFields();
 		passField 	  = new JPasswordField(20);

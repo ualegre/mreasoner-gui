@@ -32,7 +32,7 @@ examples\lfpubs\lfpubs_output.txt
 null
 </SSH_CONFIGS_FILE_PATH> 
 <DATABASE_TYPE> 
-PostgreSQL
+POSTGRESQL
 </DATABASE_TYPE> 
 <DATABASE_DRIVER> 
 org.postgresql.Driver
