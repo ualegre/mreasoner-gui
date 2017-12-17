@@ -14,9 +14,9 @@ import edu.casetools.icase.mreasoner.gui.view.panels.main.DatabasePanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.main.SystemSpecificationEditorPanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.main.TranslationsPanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.menu.MainMenu;
-import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.Database.DatabaseConfigsTabPanel;
-import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.EventReader.JarsConfigsTabPanel;
-import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.General.ConfigsTabPanel;
+import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.actuator.JarsConfigsTabPanel;
+import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.database.DatabaseConfigsTabPanel;
+import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.general.ConfigsTabPanel;
 
 public class MainPanel extends JPanel {
 

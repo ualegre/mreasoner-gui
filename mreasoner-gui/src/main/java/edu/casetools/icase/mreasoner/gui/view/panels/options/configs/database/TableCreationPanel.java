@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.Database;
+package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.database;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

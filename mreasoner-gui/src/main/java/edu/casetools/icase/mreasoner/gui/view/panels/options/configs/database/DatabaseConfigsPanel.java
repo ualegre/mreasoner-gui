@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.Database;
+package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.database;
 
 import java.awt.Color;
 import java.awt.GridLayout;

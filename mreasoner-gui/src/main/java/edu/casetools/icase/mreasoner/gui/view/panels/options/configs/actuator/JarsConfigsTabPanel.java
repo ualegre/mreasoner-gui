@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.EventReader;
+package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.actuator;
 
 import java.awt.BorderLayout;
 
