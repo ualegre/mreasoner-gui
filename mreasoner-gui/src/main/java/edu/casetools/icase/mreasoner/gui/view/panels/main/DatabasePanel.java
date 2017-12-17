@@ -10,9 +10,9 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
 import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.EventsTableModel;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.InternalEventsTableModel;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.ResultsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.EventsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.InternalEventsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.ResultsTableModel;
 
 public class DatabasePanel extends JPanel{
 

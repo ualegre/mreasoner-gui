@@ -8,10 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import edu.casetools.icase.mreasoner.gui.view.panels.main.MappingPanels.ImplementationPanel;
-import edu.casetools.icase.mreasoner.gui.view.panels.main.MappingPanels.MappingPanel;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.SensorImplementationTableModel;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.SensorsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.main.mapping.ImplementationPanel;
+import edu.casetools.icase.mreasoner.gui.view.panels.main.mapping.MappingPanel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.SensorImplementationTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.SensorsTableModel;
 
 public class SensorMappingPanel extends JPanel{
 

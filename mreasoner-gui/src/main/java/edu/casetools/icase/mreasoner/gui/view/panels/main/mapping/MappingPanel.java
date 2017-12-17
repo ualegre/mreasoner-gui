@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.main.MappingPanels;
+package edu.casetools.icase.mreasoner.gui.view.panels.main.mapping;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.SensorsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.SensorsTableModel;
 import edu.casetools.icase.mreasoner.gui.view.panels.utils.SpringUtilities;
 
 

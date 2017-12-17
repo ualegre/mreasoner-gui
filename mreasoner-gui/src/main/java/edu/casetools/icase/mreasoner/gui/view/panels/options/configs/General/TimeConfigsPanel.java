@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.options.Configs.General;
+package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.General;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs.EXECUTION_MODE;
-import edu.casetools.icase.mreasoner.gui.view.panels.options.Panels.RadioButtonsPanel;
+import edu.casetools.icase.mreasoner.gui.view.panels.options.panels.RadioButtonsPanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.utils.SpringUtilities;
 
 public class TimeConfigsPanel extends JPanel{

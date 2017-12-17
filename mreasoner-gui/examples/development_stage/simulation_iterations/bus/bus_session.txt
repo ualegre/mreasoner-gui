@@ -29,7 +29,7 @@ examples\lfpubs\lfpubs_output.txt
 .\examples\development_stage\simulation_iterations\bus\bus_session.txt
 </SESSION_FILE_PATH> 
 <SSH_CONFIGS_FILE_PATH> 
-.\examples\development_stage\simulation_iterations\bus\ssh_configs.txt
+null
 </SSH_CONFIGS_FILE_PATH> 
 <DATABASE_TYPE> 
 PostgreSQL

@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.main.MappingPanels;
+package edu.casetools.icase.mreasoner.gui.view.panels.main.mapping;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

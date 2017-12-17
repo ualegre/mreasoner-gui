@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.options.Panels;
+package edu.casetools.icase.mreasoner.gui.view.panels.options.panels;
 
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;

@@ -9,10 +9,10 @@ import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs.EXECUTI
 import edu.casetools.icase.mreasoner.database.core.connection.DBConnection.STATUS;
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.icase.mreasoner.gui.controller.Controller;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.EventsTableModel;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.InternalEventsTableModel;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.ResultsTableModel;
-import edu.casetools.icase.mreasoner.gui.view.panels.models.Models.SensorsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.EventsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.InternalEventsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.ResultsTableModel;
+import edu.casetools.icase.mreasoner.gui.view.panels.models.types.SensorsTableModel;
 
 
 public class ConfigsListener implements ActionListener{

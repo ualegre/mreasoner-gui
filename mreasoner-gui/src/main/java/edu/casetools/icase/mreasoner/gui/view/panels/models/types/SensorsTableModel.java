@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui.view.panels.models.Models;
+package edu.casetools.icase.mreasoner.gui.view.panels.models.types;
 
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.icase.mreasoner.gui.view.panels.models.DefaultModel;
