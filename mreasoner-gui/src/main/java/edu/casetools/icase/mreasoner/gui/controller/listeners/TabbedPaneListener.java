@@ -49,39 +49,41 @@ public class TabbedPaneListener implements MouseListener{
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		int selected = controller.getView().getMainWindow().getMainPanel().getRightTabbedPane().getSelectedIndex();
+		String defaultTitle = "";
+		String filePath = "";
 		switch(selected){
 		case 0:
-			String defaultSystemSpec = "System Specification File Editor - ";
-			String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath();
-			if(fileName != null){
-				controller.getView().getMainWindow().setTitle(defaultSystemSpec+fileName);
-			}else{
-				controller.getView().getMainWindow().setTitle(defaultSystemSpec+"New File");
-			}
-
+			defaultTitle = "M Specification File Editor - ";
+			filePath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath();
+			displayTitle(defaultTitle, filePath);
 			break;
 		case 1:
-			controller.getView().getMainWindow().setTitle("Database Results");
+			defaultTitle = "Database Results - ";
+			filePath = controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getName();
+			displayTitle(defaultTitle, filePath);
 			refresh();
 			break;
 		case 2:
-			controller.getView().getMainWindow().setTitle("Sensor Mapping");
+			defaultTitle = "Vera Manager - ";
+			filePath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSSHConfigsPath();
+			displayTitle(defaultTitle, filePath);
 			break;
 		case 3:
-			controller.getView().getMainWindow().setTitle("Actuator Mapping");
-			break;
-		case 4:
-			String defaultLFPUBS = "LFPUBS Rule Translations - ";
-			String lfpubsFile = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath();
-			if(lfpubsFile != null){
-				controller.getView().getMainWindow().setTitle(defaultLFPUBS+lfpubsFile);
-			}else{
-				controller.getView().getMainWindow().setTitle(defaultLFPUBS+"New File");
-			}
+			defaultTitle = "LFPUBS Rule Translations - ";
+			filePath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath();
+			displayTitle(defaultTitle, filePath);
 			break;
 		}
 		
 		
+	}
+
+	private void displayTitle(String defaultTitle, String filePath) {
+		if(filePath != null){
+			controller.getView().getMainWindow().setTitle(defaultTitle+filePath);
+		}else{
+			controller.getView().getMainWindow().setTitle(defaultTitle+"New File");
+		}
 	}
 	private void refresh() {
 		STATUS status;// TODO Auto-generated method stub

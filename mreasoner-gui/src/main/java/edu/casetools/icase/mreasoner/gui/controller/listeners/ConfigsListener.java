@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs;
 import edu.casetools.icase.mreasoner.core.elements.time.conf.TimeConfigs.EXECUTION_MODE;
 import edu.casetools.icase.mreasoner.database.core.connection.DBConnection.STATUS;
@@ -138,9 +139,9 @@ public class ConfigsListener implements ActionListener{
 	}
 
 	private boolean checkDatabase() {
-		MConfigs configs = controller.getView().getMainWindow().getMainPanel()
-		.getDatabaseConfigsTabPanel().getDatabaseCreationPanel().getDBConfigs(new MConfigs());
-		boolean exists = controller.getModel().getDBConnection().databaseExists(configs.getDBConfigs().getDbName());	
+		MDBConfigs configs = controller.getView().getMainWindow().getMainPanel()
+		.getDatabaseConfigsTabPanel().getDatabaseCreationPanel().getDBConfigs(new MDBConfigs());
+		boolean exists = controller.getModel().getDBConnection().databaseExists(configs.getDbName());	
 		controller.getView().getMainWindow().getMainPanel()
 				.getDatabaseConfigsTabPanel().getDatabaseCreationPanel().setStatus(exists); 
 
@@ -283,10 +284,10 @@ public class ConfigsListener implements ActionListener{
 	private MConfigs getConfigs(){
 			MConfigs configs = 
 					controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs();
-			configs = 
-					controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getDBConfigs(configs);	
-			configs = 
-					controller.getView().getMainWindow().getMainPanel().getEventReaderConfigsPanel().getJarConfigs(configs);
+			configs.setDBConfigs( 
+					controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getDBConfigs(configs.getDBConfigs()));	
+//			configs = 
+//					controller.getView().getMainWindow().getMainPanel().getEventReaderConfigsPanel().getJarConfigs(configs);
 			configs.getFilesConfigs().setSystemSpecificationFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath());
 			configs.getFilesConfigs().setSessionFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath());
 			//System.out.println("CONFIGS PATH "+configs.getConfigsFilePath()+" - "+controller.getView().getMainWindow().getMainPanel().getMainMenu().getConfigsPath());

@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
-import edu.casetools.icase.mreasoner.configs.data.files.FilesConfigs;
 import edu.casetools.icase.mreasoner.gui.controller.Controller;
 import edu.casetools.icase.mreasoner.gui.view.panels.menu.MainMenu.FILECHOOSER;
 import edu.casetools.icase.mreasoner.gui.view.panels.menu.MainMenu.FILETYPE;
+import edu.casetools.icase.mreasoner.vera.sensors.ssh.configs.SSHConfigs;
 
 
 
@@ -36,15 +36,53 @@ public class MainMenuListener implements ActionListener {
 		else if(e.getActionCommand().equals("New Session")) newConfigurationsButton();
 		else if(e.getActionCommand().equals("Load Session")) loadConfigurationsButton();
 		else if(e.getActionCommand().equals("Save Session")) saveConfigurationsButton();
-		else if(e.getActionCommand().equals("Save Session As")) saveConfigurationsButtonAs();
+		else if(e.getActionCommand().equals("Save Session As")) saveConfigurationsAsButton();
+		else if(e.getActionCommand().equals("New SSH Configs")) newSSHConfigurationsButton();
+		else if(e.getActionCommand().equals("Load SSH Configs")) loadSSHConfigurationsButton();
+		else if(e.getActionCommand().equals("Save SSH Configs")) saveSSHConfigurationsButton();
+		else if(e.getActionCommand().equals("Save SSH Configs As")) saveSSHConfigurationsAsButton();
 		else if(e.getActionCommand().equals("Export to NuSMV")) exportToNuSMV();
 		
 	}
 	
+	private void saveSSHConfigurationsAsButton() {
+		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSSHConfigsPath();
+		String file = promptFileName(configsPath, FILECHOOSER.SAVE, FILETYPE.CONF);
+		if(file != null){
+			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setSSHConfigsPath(file);
+			saveSSHConfigurationsButton();
+		}
+		
+	}
+
+	private void saveSSHConfigurationsButton() {
+		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSSHConfigsPath();
+		SSHConfigs sshConfigs = controller.getView().getMainWindow().getMainPanel().getSshConfigsTabPanel().getSSHConfigs(new SSHConfigs());
+		if(!configsPath.isEmpty() && !configsPath.equals("null"))
+			controller.getModel().getTesterModel().writeFile(configsPath, sshConfigs.parseConfigs());
+		
+	}
+
+	private void loadSSHConfigurationsButton() {
+		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSSHConfigsPath();
+		String file = promptFileName(configsPath, FILECHOOSER.OPEN, FILETYPE.CONF);
+		if(file != null){
+			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setSSHConfigsPath(file);
+			MConfigs configs = controller.getView().getMainWindow().getMainPanel().getConfigs();
+			SSHConfigs sshConfigs = controller.getModel().getConfigsReader().readSSHConfigs(file);
+			configs.setSshConfigs(sshConfigs);
+			controller.getView().getMainWindow().getMainPanel().setConfigs(configs);	
+		}
+		
+	}
+
+	private void newSSHConfigurationsButton() {
+		controller.getView().getMainWindow().getMainPanel().getSshConfigsTabPanel().setSSHConfigs(new SSHConfigs());
+	}
+
 	private void exportToNuSMV() {
 		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.SAVE, FILETYPE.SMV);//controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().displaySaveConfigsFileChooser();
-		
+		String file = promptFileName(configsPath, FILECHOOSER.SAVE, FILETYPE.SMV);	
 		if(file != null){			
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(file);
 			MConfigs configs = getSystemConfigs();
@@ -53,15 +91,16 @@ public class MainMenuListener implements ActionListener {
 		
 	}
 
-	private void saveConfigurationsButtonAs() {
+	private void saveConfigurationsAsButton() {
 		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.SAVE, FILETYPE.CONF);//controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().displaySaveConfigsFileChooser();
-		
+		String file = promptFileName(configsPath, FILECHOOSER.SAVE, FILETYPE.CONF);
 		if(file != null){
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(file);
-			FilesConfigs configs = getSystemConfigs().getFilesConfigs();
-			configs.setSessionFilePath(file);
-			controller.getModel().getTesterModel().writeFile(configs.getSessionFilePath(), configs.parseConfigs());		
+			MConfigs configs = getSystemConfigs();
+			controller.getModel().getTesterModel().writeFile(configs.getFilesConfigs().getSessionFilePath(), configs.parseConfigs());	
+			if(!configs.getTimeConfigs().isSimulation()){
+				saveSSHConfigurationsAsButton();	
+			}
 			controller.getView().getMainWindow().getMainPanel().getMainMenu().enableConfigurationButtons(true);
 		}
 		
@@ -69,9 +108,7 @@ public class MainMenuListener implements ActionListener {
 
 	private void loadConfigurationsButton() {
 		String configsPath = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath();
-		if(configsPath.equals(""))
-			configsPath = ".\\examples\\development_stage";
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, FILECHOOSER.OPEN, FILETYPE.CONF);
+		String file = promptFileName(configsPath, FILECHOOSER.OPEN, FILETYPE.CONF);
 		controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().setText("");
 		if(file != null){
 			MConfigs configs = controller.getModel().getConfigsReader().readConfigs(file);
@@ -88,6 +125,13 @@ public class MainMenuListener implements ActionListener {
 		
 	}
 
+	private String promptFileName(String configsPath, FILECHOOSER fcType, FILETYPE fileType) {
+		if(configsPath.isEmpty()||configsPath.equals("null"))
+			configsPath = ".\\examples\\development_stage";
+		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(configsPath, fcType, fileType);
+		return file;
+	}
+
 	private void newConfigurationsButton() {
 		MConfigs configs = new MConfigs();
 		controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().setText("");
@@ -96,9 +140,15 @@ public class MainMenuListener implements ActionListener {
 		
 	}
 	
+	
+	
 	private void saveConfigurationsButton(){
 		MConfigs configs = getSystemConfigs();
-		controller.getModel().getTesterModel().writeFile(configs.getFilesConfigs().getSessionFilePath(), configs.parseConfigs());		
+		controller.getModel().getTesterModel().writeFile(configs.getFilesConfigs().getSessionFilePath(), configs.parseConfigs());	
+		if(!configs.getTimeConfigs().isSimulation()){
+			saveSSHConfigurationsButton();	
+		}
+		controller.getView().getMainWindow().getMainPanel().getMainMenu().enableConfigurationButtons(true);
 	}
 
 	private void clearTab() {
@@ -126,21 +176,21 @@ public class MainMenuListener implements ActionListener {
 
 	private void loadLFPUBSFile() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getLFPUBSPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.OPEN, FILETYPE.LFPUBS);
+		String file = promptFileName(fileName,FILECHOOSER.OPEN,FILETYPE.LFPUBS);
 		loadLFPUBSFileView(file);
 
 	}
 	
 	private void loadLFPUBSFileView(String file){
 		if(file != null){
-			if(!file.equals("null")){
+			if(!file.equals("null") && !file.isEmpty()){
 				String content;
 				try {
 					content = controller.getModel().getTesterModel().read(file);
 					controller.getView().getMainWindow().getMainPanel().getTranslataionsPanel().setTopText(content);
 					controller.getView().getMainWindow().getMainPanel().getTranslataionsPanel().enableTopPanel();
 					controller.getView().getMainWindow().getMainPanel().getMainMenu().enableTranslateButtons(true);	
-					controller.getView().getMainWindow().getMainPanel().getRightTabbedPane().setSelectedIndex(2);
+					//controller.getView().getMainWindow().getMainPanel().getRightTabbedPane().setSelectedIndex(2);
 					controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setLFPUBSPath(file);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -154,12 +204,14 @@ public class MainMenuListener implements ActionListener {
 	private MConfigs saveConfigurations(){
 		MConfigs configs = this.getSystemConfigs();
 		controller.getModel().getTesterModel().writeFile(configs.getFilesConfigs().getSessionFilePath(), configs.parseConfigs());
+		if(!configs.getTimeConfigs().isSimulation())
+				controller.getModel().getTesterModel().writeFile(configs.getFilesConfigs().getSshConfigsFilePath(), configs.getSshConfigs().parseConfigs());
 		return configs;
 	}
 	
 	private void saveResultAsButtonAction() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getResultsPath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.SAVE, FILETYPE.CONF);
+		String file = promptFileName(fileName,FILECHOOSER.SAVE,FILETYPE.LOG);
 		if(file != null){
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setResultsPath(file);
 			String content = controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().getText();
@@ -222,7 +274,7 @@ public class MainMenuListener implements ActionListener {
 	
 	private void saveAsButtonAction() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.SAVE, FILETYPE.MTPL);
+		String file = promptFileName(fileName,FILECHOOSER.SAVE,FILETYPE.MTPL);
 		if(file != null){
 			controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setSystemDeclarationFilePath(file);
 			String content = controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getFileTextPane().getText();
@@ -235,7 +287,7 @@ public class MainMenuListener implements ActionListener {
 
 	private void loadButtonAction() {
 		String fileName = controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath();
-		String file = controller.getView().getMainWindow().getMainPanel().getMainMenu().displayFileChooser(fileName, FILECHOOSER.OPEN, FILETYPE.MTPL);
+		String file = promptFileName(fileName,FILECHOOSER.OPEN,FILETYPE.MTPL);
 		loadSystemSpecificationFileView(file);	
 		
 	}
@@ -266,7 +318,7 @@ public class MainMenuListener implements ActionListener {
 		controller.getView().getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getResultsTextArea().setText("");
 		controller.getView().getMainWindow().getMainPanel().getMainMenu().enableButtons(false);
 		controller.getView().getMainWindow().getMainPanel().getMainMenu().enableResultsButtons(false);
-		controller.getView().getMainWindow().setTitle("System Specification File Editor - New File");
+		controller.getView().getMainWindow().setTitle("M Specification File Editor - New File");
 	}
 
 	
@@ -281,10 +333,10 @@ public class MainMenuListener implements ActionListener {
 	private MConfigs getSystemConfigs(){
 		MConfigs configs = 
 				controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getConfigs();
-		configs = 
-				controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getDBConfigs(configs);	
-		configs = 
-				controller.getView().getMainWindow().getMainPanel().getEventReaderConfigsPanel().getJarConfigs(configs);
+		configs.setDBConfigs(
+				controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getDBConfigs(configs.getDBConfigs()));	
+		configs.setSshConfigs( 
+				controller.getView().getMainWindow().getMainPanel().getSshConfigsTabPanel().getSSHConfigs(configs.getSshConfigs()));
 		configs.getFilesConfigs().setSystemSpecificationFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSystemDeclarationFilePath());
 		configs.getFilesConfigs().setSessionFilePath(controller.getView().getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().getSessionPath());
 		//System.out.println("CONFIGS PATH "+configs.getConfigsFilePath()+" - "+controller.getView().getMainWindow().getMainPanel().getMainMenu().getConfigsPath());

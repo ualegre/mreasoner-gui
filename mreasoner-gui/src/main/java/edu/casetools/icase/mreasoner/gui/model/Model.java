@@ -81,5 +81,10 @@ public class Model {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public MConfigsLoader getSSHConfigsReader() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 
 
@@ -34,7 +33,7 @@ public class DatabaseConfigsTabPanel extends JPanel{
 		tableCreationPanel.addActionListener(actionListener);
 	}
 	
-	public MConfigs getDBConfigs(MConfigs configs) {
+	public MDBConfigs getDBConfigs(MDBConfigs configs) {		
 		configs = dbConfigsPanel.getDBConfigs(configs);
 		configs = dbCreationPanel.getDBConfigs(configs);
 		return configs;

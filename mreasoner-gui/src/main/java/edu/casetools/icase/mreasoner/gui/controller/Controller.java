@@ -86,13 +86,13 @@ public class Controller {
 	
 	private void setFileOfSystemSpecificationEditor(FilesConfigs configs) {
 		if(configs.existsSystemDeclarationFile()){
-			String content = "";
+			String content = "New File";
 			//String content = model.getTesterModel().read(configs.getSystemDeclarationFilePath());
 			view.getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getFileTextPane().setText(content);
 			view.getMainWindow().getMainPanel().getMainMenu().enableButtons(true);
 			view.getMainWindow().setTitle(configs.getSystemSpecificationFilePath());
 			view.getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setSystemDeclarationFilePath(configs.getSystemSpecificationFilePath());
-			view.getMainWindow().setTitle("System Specification File Editor - "+configs.getSystemSpecificationFilePath());
+			view.getMainWindow().setTitle("M Specification File Editor - "+configs.getSystemSpecificationFilePath());
 		}
 		view.getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().centerSplitPaneDivider();
 	}

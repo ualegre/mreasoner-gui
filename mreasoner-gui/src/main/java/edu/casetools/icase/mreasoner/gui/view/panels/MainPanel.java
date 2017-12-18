@@ -10,13 +10,15 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
+import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 import edu.casetools.icase.mreasoner.gui.view.panels.main.DatabasePanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.main.SystemSpecificationEditorPanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.main.TranslationsPanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.menu.MainMenu;
-import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.actuator.JarsConfigsTabPanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.database.DatabaseConfigsTabPanel;
 import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.general.ConfigsTabPanel;
+import edu.casetools.icase.mreasoner.gui.view.panels.options.configs.ssh.SSHConfigsTabPanel;
+import edu.casetools.icase.mreasoner.vera.sensors.ssh.configs.SSHConfigs;
 
 public class MainPanel extends JPanel {
 
@@ -26,11 +28,10 @@ public class MainPanel extends JPanel {
 	private SystemSpecificationEditorPanel systemSpecificationEditorPanel;
 	private TranslationsPanel translataionsPanel;
 	private ConfigsTabPanel configsPanel;
-//	private SensorMappingPanel sensorMappingPanel,actuatorMappingPanel;
 	private DatabasePanel databasePanel;
 	private MainMenu menu;
 	private DatabaseConfigsTabPanel databaseConfigsTabPanel;
-	private JarsConfigsTabPanel jarsConfigsPanel;
+	private SSHConfigsTabPanel sshConfigsTabPanel;
 
 	public MainPanel(MConfigs configs) {
 
@@ -39,16 +40,12 @@ public class MainPanel extends JPanel {
 		systemSpecificationEditorPanel = new SystemSpecificationEditorPanel();
 		translataionsPanel   		   = new TranslationsPanel();
 		databasePanel 				   = new DatabasePanel(configs.getTimeConfigs());
-//		sensorMappingPanel 			   = new SensorMappingPanel();
-//		actuatorMappingPanel 		   = new SensorMappingPanel();
 		databaseConfigsTabPanel    	   = new DatabaseConfigsTabPanel(configs.getDBConfigs());
-		jarsConfigsPanel 	   = new JarsConfigsTabPanel(configs);
+		sshConfigsTabPanel			   = new SSHConfigsTabPanel(configs.getSshConfigs());
 		
 		createLeftTabbedPane(configs);
 		createRightTabbedPane(configs);
 		createMainSplitPanel();
-		
-//		configureExecutionMode(configs.getTimeConfigs().getExecutionMode());
 		
 		this.setLayout(new BorderLayout());
 		this.add(mainSplitPane, BorderLayout.CENTER);
@@ -73,32 +70,17 @@ public class MainPanel extends JPanel {
 
 		leftTabbedPane.add("General", configsPanel);
 		leftTabbedPane.add("Database", databaseConfigsTabPanel);		
-		leftTabbedPane.add("Add External Jars", jarsConfigsPanel);
+		leftTabbedPane.add("Vera", sshConfigsTabPanel);
 		
 		leftTabbedPane.setEnabledAt(2, false);
 	}
 	
-//	public void configureExecutionMode(EXECUTION_MODE mode){
-//		switch(mode){
-//		case REAL_ENVIRONMENT:
-//			break;
-//		case SIMULATION_ITERATION:
-//			break;
-//		case SIMULATION_REAL_TIME:
-//			break;
-//		default:
-//			break;
-//		
-//		}
-//	}
 	
 
 	private void createRightTabbedPane(MConfigs configs) {
 		rightTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		rightTabbedPane.addTab("System Specification File Editor", systemSpecificationEditorPanel);
+		rightTabbedPane.addTab("M Specification File Editor", systemSpecificationEditorPanel);
 		rightTabbedPane.addTab("Database Results", databasePanel);
-		//rightTabbedPane.add("Sensor Mapping", sensorMappingPanel);
-		//rightTabbedPane.add("Actuator Mapping", actuatorMappingPanel);
 		rightTabbedPane.addTab("LFPUBS Rule Translations", translataionsPanel);
 
 		rightTabbedPane.setFocusable(false);
@@ -123,8 +105,6 @@ public class MainPanel extends JPanel {
 
 	public void addConfigsListener(ActionListener actionListener) {
 		configsPanel.addActionListener(actionListener);
-//		this.sensorMappingPanel.addActionListener(actionListener);
-//		this.actuatorMappingPanel.addActionListener(actionListener);
 		this.databaseConfigsTabPanel.addActionListener(actionListener);
 	}
 
@@ -148,14 +128,6 @@ public class MainPanel extends JPanel {
 		configsPanel.getGeneralConfigsPanel().addStratificationPanelActionListener(actionListener);
 	}
 
-//	public SensorMappingPanel getSensorMappingPanel() {
-//		return this.sensorMappingPanel;
-//	}
-	
-	public JarsConfigsTabPanel getEventReaderConfigsPanel(){
-		return this.jarsConfigsPanel;
-	}
-
 	public SystemSpecificationEditorPanel getSystemSpecificationEditorPanel() {
 		return this.systemSpecificationEditorPanel;
 	}
@@ -167,14 +139,6 @@ public class MainPanel extends JPanel {
 	public DatabasePanel getDatabasePanel() {
 		return this.databasePanel;
 	}
-
-//	public void enableSensorMappingTab(boolean enable) {
-//		this.rightTabbedPane.setEnabledAt(2, enable);
-//	}
-//
-//	public void enableActuatorMgrTab(boolean enable) {
-//		this.rightTabbedPane.setEnabledAt(3, enable);
-//	}
 
 	public void enableEventReaderTab(boolean enable) {
 		this.leftTabbedPane.setEnabledAt(2, enable);
@@ -188,10 +152,23 @@ public class MainPanel extends JPanel {
 		
 		configsPanel.setConfigs(configs);
 		databaseConfigsTabPanel.setDBConfigs(configs.getDBConfigs());
-		jarsConfigsPanel.setJarConfigs(configs);
+		sshConfigsTabPanel.setSSHConfigs(configs.getSshConfigs());
 			
 	}
 
+	public MConfigs getConfigs() {
+		MDBConfigs dbConfigs = new MDBConfigs();
+		SSHConfigs sshConfigs = new SSHConfigs();
+		
+		MConfigs configs = configsPanel.getConfigs();
+		configs.setDBConfigs(databaseConfigsTabPanel.getDBConfigs(dbConfigs));
+		configs.setSshConfigs(sshConfigsTabPanel.getSSHConfigs(sshConfigs));
+		
+		return configs;
+			
+	}
+
+	
 	public JSplitPane getMainSplitPane() {
 		return mainSplitPane;
 	}
@@ -199,6 +176,10 @@ public class MainPanel extends JPanel {
 	public void addRelativeTimeRBListener(ActionListener actionListener) {
 		configsPanel.addRelativeTimeRBListener(actionListener);
 		
+	}
+
+	public SSHConfigsTabPanel getSshConfigsTabPanel() {
+		return sshConfigsTabPanel;
 	}
 
 }

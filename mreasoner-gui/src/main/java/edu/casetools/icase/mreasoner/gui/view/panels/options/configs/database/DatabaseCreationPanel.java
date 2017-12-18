@@ -13,11 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 import edu.casetools.icase.mreasoner.gui.view.panels.utils.SpringUtilities;
-
-
 
 public class DatabaseCreationPanel extends JPanel {
 
@@ -78,9 +75,9 @@ public class DatabaseCreationPanel extends JPanel {
 		this.nameTf.setText(configs.getDbName());
 	}
 
-	public MConfigs getDBConfigs(MConfigs configs) {
+	public MDBConfigs getDBConfigs(MDBConfigs configs) {
 
-		configs.getDBConfigs().setDbName(nameTf.getText());
+		configs.setDbName(nameTf.getText());
 
 		return configs;
 	}

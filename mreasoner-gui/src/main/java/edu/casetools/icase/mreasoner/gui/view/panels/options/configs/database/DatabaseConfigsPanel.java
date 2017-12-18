@@ -15,7 +15,6 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 import edu.casetools.icase.mreasoner.database.core.MDBImplementations;
 import edu.casetools.icase.mreasoner.database.core.connection.DBConnection.STATUS;
@@ -31,7 +30,7 @@ public class DatabaseConfigsPanel extends JPanel{
 	JTextField driverTf,ipTf,portTf,userTf;
 	JComboBox<String> comboBox;
 	JPasswordField passField;
-	JPanel dbConfigsPanel,buttonPanel;
+	JPanel dbConfigsPanel, buttonPanel;
 
 	
 	public DatabaseConfigsPanel(MDBConfigs configs){
@@ -54,7 +53,6 @@ public class DatabaseConfigsPanel extends JPanel{
         connectButton.setFocusable(false);
      	connectButton.setHorizontalAlignment( SwingConstants.CENTER );
      	buttonPanel.setBorder(BorderFactory.createEmptyBorder(2,10,2,4));
-     //	buttonPanel.add(conectionStatusLabel);
      	buttonPanel.add(conectionStatus);
      	buttonPanel.add(connectButton);   
      	
@@ -80,7 +78,6 @@ public class DatabaseConfigsPanel extends JPanel{
 	private void initJLabels(){
         dbTypeLabel 		 = new JLabel("Database type: ");
         driver				 = new JLabel("Driver: ");
-      //  dbName  		     = new JLabel("Database name: ");
         ipLabel     		 = new JLabel("Ip: ");
         portLabel   		 = new JLabel("Port: ");
         userLabel   		 = new JLabel("Username: ");
@@ -91,7 +88,6 @@ public class DatabaseConfigsPanel extends JPanel{
 	
 	private void initTextFields(){
 		driverTf =  new JTextField(20);
-    //    dbNameTf =  new JTextField(20);
         ipTf 	 =  new JTextField(20);
         portTf   =  new JTextField(20);
         userTf   =  new JTextField(20);
@@ -102,8 +98,6 @@ public class DatabaseConfigsPanel extends JPanel{
        dbConfigsPanel.add(comboBox);
        dbConfigsPanel.add(driver);
        dbConfigsPanel.add(driverTf);
-//       dbConfigsPanel.add(dbName);
-//       dbConfigsPanel.add(dbNameTf);
        dbConfigsPanel.add(ipLabel);
        dbConfigsPanel.add(ipTf);
        dbConfigsPanel.add(portLabel);
@@ -118,35 +112,21 @@ public class DatabaseConfigsPanel extends JPanel{
 
 	private void setLabels(){
         dbTypeLabel.setLabelFor(comboBox);     
-//        dbName.setLabelFor(dbNameTf);
         ipLabel.setLabelFor(ipTf);
         portLabel.setLabelFor(portTf);
         userLabel.setLabelFor(userTf);
         conectionStatusLabel.setLabelFor(conectionStatus);
 	}
-	@SuppressWarnings("deprecation")
-	public MConfigs getDBConfigs(MConfigs configs) {
-		if (configs == null) configs = new MConfigs();	
+	
+	public MDBConfigs getDBConfigs(MDBConfigs configs) {
+		if (configs == null) configs = new MDBConfigs();	
 		String value = comboBox.getItemAt(comboBox.getSelectedIndex());
-		configs.getDBConfigs().setDbType(value);
-
-		value = this.driverTf.getText();
-		configs.getDBConfigs().setDriver(value);
-		
-//		value = this.dbNameTf.getText();
-//		configs.getDBConfigs().setDbName(value);
-	
-		value = this.ipTf.getText();
-		configs.getDBConfigs().setIp(value);
-
-		value = this.portTf.getText();
-		configs.getDBConfigs().setPort(value);
-	
-		value =this.userTf.getText();
-		configs.getDBConfigs().setUser(value);
-
-		value = this.passField.getText();
-		configs.getDBConfigs().setPassword(value);
+		configs.setDbType(value);
+		configs.setDriver(driverTf.getText());	
+		configs.setIp(ipTf.getText());
+		configs.setPort(portTf.getText());	
+		configs.setUser(userTf.getText());
+		configs.setPassword(new String(passField.getPassword()));
 
 		return configs;
 	}
@@ -167,10 +147,8 @@ public class DatabaseConfigsPanel extends JPanel{
 	
 	public void setDBConfigs(MDBConfigs configs) {
 		
-		//this.comboBox.set
 		this.comboBox.setSelectedItem(configs.getDbType());
 		this.driverTf.setText(configs.getDriver());
-//		this.dbNameTf.setText(configs.getDbName());
 		this.ipTf.setText(configs.getIp());
 		this.portTf.setText(configs.getPort());
 		this.userTf.setText(configs.getUser());

@@ -17,8 +17,8 @@ public class FilePathsPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	//JPanel mainPanel;
-	JLabel specificationLabel,resultsLabel,LFPUBSLabel,configsLabel;
-	JLabel specificationPathLabel,resultsPathLabel,LFPUBSPathLabel,configsPathLabel;
+	JLabel specificationLabel,resultsLabel,LFPUBSLabel,configsLabel,sshConfigsLabel;
+	JLabel specificationPathLabel,resultsPathLabel,LFPUBSPathLabel,configsPathLabel,sshConfigsPathLabel;
 	JButton specificationButton,resultsButton,LFPUBSLabelButton,ConfigsLabelButton;
 	
 	
@@ -29,33 +29,36 @@ public class FilePathsPanel extends JPanel{
 		 TitledBorder titledBorder = BorderFactory.createTitledBorder("File Paths Configurations");
 		 //mainPanel.setBorder(titledBorder);
 		 this.setBorder(titledBorder);
-		 specificationLabel = new JLabel("System Specification File Path");
-		 resultsLabel = new JLabel("System Results File Path");
-		 LFPUBSLabel = new JLabel("LFPUBS Output File Path");
-		 configsLabel = new JLabel("System Configurations File Path");
+		 specificationLabel = new JLabel("M Specification File Path");
+		 resultsLabel 	    = new JLabel("M Results File Path");
+		 LFPUBSLabel 	    = new JLabel("LFPUBS Output File Path");
+		 configsLabel 	    = new JLabel("System Configurations File Path");
+		 sshConfigsLabel    = new JLabel("SSH Configurations File Path");
 		 
 		 specificationPathLabel = new JLabel(writeNull(configs.getSystemSpecificationFilePath()));
 		 specificationPathLabel.setForeground(Color.LIGHT_GRAY);
-		 resultsPathLabel = new JLabel(writeNull(configs.getResultsFilePath()));
+		 resultsPathLabel 		= new JLabel(writeNull(configs.getResultsFilePath()));
 		 resultsPathLabel.setForeground(Color.LIGHT_GRAY);
-		 LFPUBSPathLabel = new JLabel(writeNull(configs.getLFPUBSOutputFilePath()));
+		 LFPUBSPathLabel 		= new JLabel(writeNull(configs.getLFPUBSOutputFilePath()));
 		 LFPUBSPathLabel.setForeground(Color.LIGHT_GRAY);
-		 configsPathLabel = new JLabel(writeNull(configs.getSessionFilePath()));
+		 configsPathLabel 		= new JLabel(writeNull(configs.getSessionFilePath()));
 		 configsPathLabel.setForeground(Color.LIGHT_GRAY);
+		 sshConfigsPathLabel 		= new JLabel(writeNull(configs.getSessionFilePath()));
+		 sshConfigsPathLabel.setForeground(Color.LIGHT_GRAY);
 		 
-
-	        
 	     this.add( specificationLabel );
 	     this.add( specificationPathLabel );
-	     this.add(	resultsLabel );   
+	     this.add( resultsLabel );   
 	     this.add( resultsPathLabel );
 	     this.add( LFPUBSLabel );
 	     this.add( LFPUBSPathLabel );
-	     this.add(	configsLabel );   
+	     this.add( configsLabel );   
 	   	 this.add( configsPathLabel );
+	     this.add( sshConfigsLabel );   
+	   	 this.add( sshConfigsPathLabel );
 	   	 
         SpringUtilities.makeCompactGrid(this,
-                8, 1, 		  //rows, cols
+                10, 1, 		  //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
 	 //  	 mainPanel.add(this);
@@ -79,6 +82,7 @@ public class FilePathsPanel extends JPanel{
 		configs.setResultsFilePath(readNull(resultsPathLabel.getText()));
 		configs.setLFPUBSOutputFilePath(readNull(LFPUBSPathLabel.getText()));
 		configs.setSessionFilePath(readNull(configsPathLabel.getText()));
+		configs.setSshConfigsFilePath(readNull(sshConfigsPathLabel.getText()));
 		return configs;
 	}
 	
@@ -87,6 +91,7 @@ public class FilePathsPanel extends JPanel{
 		resultsPathLabel.setText(writeNull(configs.getResultsFilePath()));
 		LFPUBSPathLabel.setText(writeNull(configs.getLFPUBSOutputFilePath()));
 		configsPathLabel.setText(writeNull(configs.getSessionFilePath()));
+		sshConfigsPathLabel.setText(writeNull(configs.getSshConfigsFilePath()));
 	}
 	
 	public String getSystemDeclarationFilePath(){
@@ -105,6 +110,10 @@ public class FilePathsPanel extends JPanel{
 		return readNull(configsPathLabel.getText());
 	}
 	
+	public String getSSHConfigsPath(){
+		return readNull(sshConfigsPathLabel.getText());
+	}
+	
 	public void setSystemDeclarationFilePath(String path){
 		specificationPathLabel.setText(writeNull(path));
 	}
@@ -119,6 +128,10 @@ public class FilePathsPanel extends JPanel{
 	
 	public void setConfigsPath(String path){
 		configsPathLabel.setText(writeNull(path));
+	}
+	
+	public void setSSHConfigsPath(String path){
+		sshConfigsPathLabel.setText(writeNull(path));
 	}
 	
 }

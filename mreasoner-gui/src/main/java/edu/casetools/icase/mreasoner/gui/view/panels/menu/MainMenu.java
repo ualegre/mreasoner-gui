@@ -18,12 +18,14 @@ import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 public class MainMenu extends JMenuBar{
 	private JFileChooser 	    fileChooser;
 	private static final long serialVersionUID = 1L;
-	private JMenu fileMenu,systemSpecificationMenu,resultLogMenu,translatorMenu,configsMenu,exportMenu;
+	private JMenu fileMenu, mSystemMenu, mSpecificationMenu, mResultLogMenu, veraMenu, 
+				  translatorMenu, configsMenu, verificationMenu;
 	private JButton startTest,stopTest;
-	private JMenuItem newSSMenu,loadSSMenu,saveSSMenu,saveAsSSMenu,saveResultLog,
-					  saveResultLogAs,loadFile,translate,clear,newConfigs,loadConfigs,
-					  saveConfigs,saveConfigsAs,exportToNuSMV;
-	public enum FILETYPE {CONF,SMV,MTPL, LFPUBS};
+	private JMenuItem newSpecMenu, loadSpecMenu, saveSpecMenu, saveASpecSMenu, saveResultLog,
+					  saveResultLogAs, newSSHConfigsItem, loadSSHConfigsItem, saveSSHConfigsItem, 
+					  saveAsSSHConfigsItem, loadFile, translate, clear, newConfigs, loadConfigs,
+					  saveConfigs, saveConfigsAs, exportToNuSMV;
+	public enum FILETYPE {CONF,SMV,MTPL,LFPUBS,TXT, LOG};
 	public enum FILECHOOSER {OPEN,SAVE};
 
 	//private String fileName,resultsPath,configsPath,LFPUBSFileName;
@@ -33,15 +35,21 @@ public class MainMenu extends JMenuBar{
 	public MainMenu(MConfigs configs){
         
        fileMenu        			= new JMenu("Main Menu");
-	   systemSpecificationMenu  = new JMenu("System Specification File");
-	   resultLogMenu   			= new JMenu("System Results Log");
-	   translatorMenu  			= new JMenu("LFPUBS Output File");
+	   mSystemMenu  			= new JMenu("M Reasoner");
+	   mSpecificationMenu   	= new JMenu("M Specification");
+	   mResultLogMenu   		= new JMenu("M Result Log");
+	   veraMenu   				= new JMenu("Vera");
+       newSSHConfigsItem		= new JMenuItem("New SSH Configs");
+       loadSSHConfigsItem       = new JMenuItem("Load SSH Configs");
+       saveSSHConfigsItem       = new JMenuItem("Save SSH Configs");
+       saveAsSSHConfigsItem 	= new JMenuItem("Save SSH Configs As");
+	   translatorMenu  			= new JMenu("LFPUBS");
 	   configsMenu              = new JMenu("Session");
-	   exportMenu				= new JMenu("Export");
-       newSSMenu		   	 	= new JMenuItem("New File");
-       loadSSMenu        		= new JMenuItem("Load File");
-       saveSSMenu        		= new JMenuItem("Save File");
-       saveAsSSMenu 	    	= new JMenuItem("Save File As");
+	   verificationMenu			= new JMenu("Verification");
+       newSpecMenu		   	 	= new JMenuItem("New File");
+       loadSpecMenu        		= new JMenuItem("Load File");
+       saveSpecMenu        		= new JMenuItem("Save File");
+       saveASpecSMenu 	    	= new JMenuItem("Save File As");
        exportToNuSMV        	= new JMenuItem("Export to NuSMV");
        saveResultLog   			= new JMenuItem("Save Result");
        saveResultLogAs 			= new JMenuItem("Save Result As");
@@ -53,21 +61,19 @@ public class MainMenu extends JMenuBar{
        saveConfigs 				= new JMenuItem("Save Session");
        saveConfigsAs 		    = new JMenuItem("Save Session As");
 
- 
+       mSystemMenu.add(mSpecificationMenu);
+       mSystemMenu.add(mResultLogMenu);
        
-//       fileMenu.add(newMenu);
-//       fileMenu.add(loadMenu);
-//       fileMenu.add(saveMenu);
-//       fileMenu.add(saveAsMenu);
-//       fileMenu.addSeparator();
-       resultLogMenu.add(saveResultLog);
-       resultLogMenu.add(saveResultLogAs);
-        
-       systemSpecificationMenu.add(newSSMenu);
-       systemSpecificationMenu.add(loadSSMenu);
-       systemSpecificationMenu.add(saveSSMenu);
-       systemSpecificationMenu.add(saveAsSSMenu);
-       systemSpecificationMenu.add(exportMenu);
+       mResultLogMenu.add(saveResultLog);
+       mResultLogMenu.add(saveResultLogAs);
+       
+       mSpecificationMenu.add(newSpecMenu);
+       mSpecificationMenu.add(loadSpecMenu);
+       mSpecificationMenu.add(saveSpecMenu);
+       mSpecificationMenu.add(saveASpecSMenu);
+       mSpecificationMenu.add(verificationMenu);
+       
+       verificationMenu.add(exportToNuSMV);
        
        translatorMenu.add(loadFile);
        translatorMenu.addSeparator();
@@ -88,12 +94,15 @@ public class MainMenu extends JMenuBar{
        
        fileMenu.add(configsMenu);
        fileMenu.addSeparator();
-       fileMenu.add(systemSpecificationMenu);
-       fileMenu.add(resultLogMenu);
+       fileMenu.add(mSystemMenu);
+       fileMenu.add(veraMenu);
        fileMenu.add(translatorMenu);
-
-       exportMenu.add(exportToNuSMV);
-
+       fileMenu.add(verificationMenu);
+       
+       veraMenu.add(newSSHConfigsItem);
+       veraMenu.add(loadSSHConfigsItem);
+       veraMenu.add(saveSSHConfigsItem);
+       veraMenu.add(saveAsSSHConfigsItem);
 
        this.add(fileMenu);
        this.add(startTest);
@@ -117,7 +126,7 @@ public class MainMenu extends JMenuBar{
 	}
 
 	public void enableButtons(boolean enable){
-		this.saveSSMenu.setEnabled(enable);
+		this.saveSpecMenu.setEnabled(enable);
 		this.startTest.setEnabled(enable);
 
 	}
@@ -142,10 +151,14 @@ public class MainMenu extends JMenuBar{
 	
 	public void addActionListener(ActionListener actionListener){
 
-		this.newSSMenu.addActionListener(actionListener);
-		this.loadSSMenu.addActionListener(actionListener);
-		this.saveSSMenu.addActionListener(actionListener);
-		this.saveAsSSMenu.addActionListener(actionListener);
+		this.newSpecMenu.addActionListener(actionListener);
+		this.loadSpecMenu.addActionListener(actionListener);
+		this.saveSpecMenu.addActionListener(actionListener);
+		this.saveASpecSMenu.addActionListener(actionListener);
+		this.newSSHConfigsItem.addActionListener(actionListener);
+		this.loadSSHConfigsItem.addActionListener(actionListener);
+		this.saveSSHConfigsItem.addActionListener(actionListener);
+		this.saveAsSSHConfigsItem.addActionListener(actionListener);
 		this.exportToNuSMV.addActionListener(actionListener);
 		this.saveResultLog.addActionListener(actionListener);
 		this.startTest.addActionListener(actionListener);
@@ -285,7 +298,11 @@ public class MainMenu extends JMenuBar{
 			case MTPL:
 				return new FileNameExtensionFilter("M File", new String[] {"mtpl","txt"});
 			case LFPUBS:
+				return new FileNameExtensionFilter("LFPUBS File", new String[] {"lfpubs","txt"});
+			case TXT:
 				return new FileNameExtensionFilter("LFPUBS File", new String[] {"txt"});
+			case LOG:
+				return new FileNameExtensionFilter("LFPUBS File", new String[] {"txt","log"});
 			default:
 				return null;
 		}

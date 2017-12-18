@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
 	}
 	
 	private void setWindowConfigs(){
-		this.setTitle("System Specification File Editor - New File");
+		this.setTitle("M Specification File Editor - New File");
 		this.setWindowBounds();
 		//
 		this.setResizable(true);
