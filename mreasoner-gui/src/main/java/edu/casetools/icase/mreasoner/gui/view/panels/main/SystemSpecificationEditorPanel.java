@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -61,8 +63,12 @@ public class SystemSpecificationEditorPanel extends JPanel {
 		DefaultCaret caret = (DefaultCaret) resultsTextArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		
-
 		resultsScrollPane = new JScrollPane(resultsTextArea);
+		resultsScrollPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+	        public void adjustmentValueChanged(AdjustmentEvent e) {  
+	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
+	        }
+	    });
 
 		
 		midMidPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));		
@@ -151,9 +157,6 @@ public class SystemSpecificationEditorPanel extends JPanel {
 	public JSplitPane getSplitPane() {
 		return this.midMidPanel;	
 	}
-	
-	
-	
 	
 
 }
