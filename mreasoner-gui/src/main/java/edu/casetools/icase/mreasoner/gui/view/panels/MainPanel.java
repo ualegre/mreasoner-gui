@@ -1,10 +1,10 @@
 package edu.casetools.icase.mreasoner.gui.view.panels;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
@@ -26,7 +26,7 @@ public class MainPanel extends JPanel {
 	private JSplitPane mainSplitPane;
 	private JTabbedPane leftTabbedPane, rightTabbedPane;
 	private SystemSpecificationEditorPanel systemSpecificationEditorPanel;
-	private TranslationsPanel translataionsPanel;
+	private TranslationsPanel translationPanel;
 	private ConfigsTabPanel configsPanel;
 	private DatabasePanel databasePanel;
 	private MainMenu menu;
@@ -38,7 +38,7 @@ public class MainPanel extends JPanel {
 		menu 						   = new MainMenu(configs);
 		configsPanel 				   = new ConfigsTabPanel(configs);
 		systemSpecificationEditorPanel = new SystemSpecificationEditorPanel();
-		translataionsPanel   		   = new TranslationsPanel();
+		translationPanel   		   	   = new TranslationsPanel();
 		databasePanel 				   = new DatabasePanel(configs.getTimeConfigs());
 		databaseConfigsTabPanel    	   = new DatabaseConfigsTabPanel(configs.getDBConfigs());
 		sshConfigsTabPanel			   = new SSHConfigsTabPanel(configs.getSshConfigs());
@@ -48,7 +48,7 @@ public class MainPanel extends JPanel {
 		createMainSplitPanel();
 		
 		this.setLayout(new BorderLayout());
-		this.add(mainSplitPane, BorderLayout.CENTER);
+		this.add(mainSplitPane);
 		this.add(menu, BorderLayout.NORTH);
 
 	}
@@ -56,22 +56,22 @@ public class MainPanel extends JPanel {
 	private void createMainSplitPanel() {
 		mainSplitPane = new JSplitPane();
 
+		mainSplitPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));		
+		
 		mainSplitPane.setLeftComponent(leftTabbedPane);
 		mainSplitPane.setRightComponent(rightTabbedPane);
-		mainSplitPane.setPreferredSize(new Dimension(100,200));
-
-		mainSplitPane.setEnabled(false);
+		mainSplitPane.setResizeWeight(0.5);
+		mainSplitPane.setDividerSize(5);
+		
 	}
 
 	private void createLeftTabbedPane(MConfigs configs) {
-		leftTabbedPane = new JTabbedPane();
-
-		leftTabbedPane.setFocusable(false);
-
+		leftTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		leftTabbedPane.add("General", configsPanel);
 		leftTabbedPane.add("Database", databaseConfigsTabPanel);		
 		leftTabbedPane.add("Vera", sshConfigsTabPanel);
 		
+		leftTabbedPane.setFocusable(false);
 		leftTabbedPane.setEnabledAt(2, false);
 	}
 	
@@ -81,7 +81,7 @@ public class MainPanel extends JPanel {
 		rightTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		rightTabbedPane.addTab("M Specification File Editor", systemSpecificationEditorPanel);
 		rightTabbedPane.addTab("Database Results", databasePanel);
-		rightTabbedPane.addTab("LFPUBS Rule Translations", translataionsPanel);
+		rightTabbedPane.addTab("LFPUBS Rule Translations", translationPanel);
 
 		rightTabbedPane.setFocusable(false);
 
@@ -92,11 +92,11 @@ public class MainPanel extends JPanel {
 	}
 
 	public TranslationsPanel getTranslataionsPanel() {
-		return translataionsPanel;
+		return translationPanel;
 	}
 
 	public void setTranslataionsPanel(TranslationsPanel translataionsPanel) {
-		this.translataionsPanel = translataionsPanel;
+		this.translationPanel = translataionsPanel;
 	}
 
 	public void addMainMenuListener(ActionListener actionListener) {

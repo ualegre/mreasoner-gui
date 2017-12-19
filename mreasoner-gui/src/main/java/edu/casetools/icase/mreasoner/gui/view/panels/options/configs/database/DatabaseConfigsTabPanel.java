@@ -2,8 +2,8 @@ package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.database;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
+
 
 import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 
@@ -25,6 +25,7 @@ public class DatabaseConfigsTabPanel extends JPanel{
 		this.add(dbConfigsPanel);	
 		this.add(dbCreationPanel);
 		this.add(tableCreationPanel);
+
 	}
 	
 	public void addActionListener(ActionListener actionListener){

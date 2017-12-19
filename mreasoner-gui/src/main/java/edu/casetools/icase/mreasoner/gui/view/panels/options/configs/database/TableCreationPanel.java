@@ -1,6 +1,7 @@
 package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.database;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -42,8 +43,9 @@ public class TableCreationPanel extends JPanel{
                 4, 2, 		  //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
-        this.add(mainPanel,BorderLayout.CENTER);
-        this.add(buttonsPanel,BorderLayout.SOUTH);
+        this.setLayout(new BorderLayout());
+        this.add(mainPanel,BorderLayout.NORTH);
+        this.add(buttonsPanel,BorderLayout.CENTER);
         this.setBorder(titledBorder);
 	}
 
@@ -51,7 +53,7 @@ public class TableCreationPanel extends JPanel{
 		buttonsPanel.add(checkButton);
 		buttonsPanel.add(selectAllButton);
 		buttonsPanel.add(clearButton);
-		buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0,200,0,200));
+		buttonsPanel.setBorder(BorderFactory.createEmptyBorder(140,10,10,10));
 	}
 
 
@@ -78,6 +80,7 @@ public class TableCreationPanel extends JPanel{
 	private void initializePanels(){
 		mainPanel = new JPanel(new SpringLayout());
 		buttonsPanel = new JPanel(new GridLayout(1,3));
+		buttonsPanel.setPreferredSize(new Dimension(350,20));
 	}
 	
 	private void initializeCheckBoxes(){
@@ -106,8 +109,11 @@ public class TableCreationPanel extends JPanel{
 	
 	private void initializeJButtons(){
 		checkButton = new JButton("Check");
+		checkButton.setPreferredSize(new Dimension(100,20));
 		selectAllButton = new JButton("Select All");
+		selectAllButton.setPreferredSize(new Dimension(100,20));
 		clearButton = new JButton("Clear Selected");
+		clearButton.setPreferredSize(new Dimension(100,20));
 	}
 
 	public void addActionListener(ActionListener actionListener) {

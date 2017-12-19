@@ -7,10 +7,6 @@ import javax.swing.JPanel;
 
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 
-
-
-
-
 public class ConfigsTabPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -20,17 +16,16 @@ public class ConfigsTabPanel extends JPanel{
 	FilePathsPanel filePathPanel;
 	
 	public ConfigsTabPanel(MConfigs configs){
-		this.setLayout( new GridLayout(3,1) );
+		this.setLayout( new GridLayout(5,1) );
         filePathPanel = new FilePathsPanel(configs.getFilesConfigs());
 		timeConfigs    = new TimeConfigsPanel(configs);
 		generalConfigs = new GeneralConfigsPanel(configs);
-		
-		//timePanel.add(generalConfigs,BorderLayout.NORTH);
-		//timePanel.add(timeConfigs,BorderLayout.CENTER);
 			
 	    this.add(generalConfigs);
 	    this.add(timeConfigs);
 	    this.add(filePathPanel);
+	    this.add(new JPanel());
+	    this.add(new JPanel());	    
       
        
 	}

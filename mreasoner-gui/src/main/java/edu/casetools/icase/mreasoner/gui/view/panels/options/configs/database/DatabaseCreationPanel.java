@@ -57,7 +57,7 @@ public class DatabaseCreationPanel extends JPanel {
 		nameTf    		  = new JTextField(20);
 		nameTf.setText(dbName);
 		mainPanel         = new JPanel(new SpringLayout());
-		buttonPanel       = new JPanel(new GridLayout(1,3));
+		buttonPanel       = new JPanel(new GridLayout(1,3));        
 	}
 	
 	private void addElements(){

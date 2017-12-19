@@ -53,7 +53,7 @@ postgres
 sensors
 </DATABASE_NAME> 
 <HOSTNAME> 
-10.12.102.156ad
+10.12.102.156
 </HOSTNAME> 
 <PORT> 
 22

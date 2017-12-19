@@ -22,19 +22,17 @@ import javax.swing.undo.UndoManager;
 
 public class SystemSpecificationEditorPanel extends JPanel {
 
-	private static final long serialVersionUID = -216672071026757801L;
-	private JPanel midPanel;
+	private   static final long serialVersionUID = -216672071026757801L;
+	private   final int FONT_SIZE = 12;
+	private   JPanel midPanel;
 	protected EditorPanel fileTextPane;
 	protected JTextArea resultsTextArea;
-	private JScrollPane resultsScrollPane;
-	private JSplitPane midMidPanel;
-	private int fontSize;
+	private   JScrollPane resultsScrollPane;
+	private   JSplitPane midMidPanel;
+
 
 	public SystemSpecificationEditorPanel() {
 		setLayout(new BorderLayout());
-		//Font f = UIManager.getDefaults().getFont("TabbedPane.font");
-		//fontSize = f.getSize();
-		fontSize = 12;
 		this.createMidPanel();	
 		
 	}
@@ -49,14 +47,14 @@ public class SystemSpecificationEditorPanel extends JPanel {
 		midMidPanel = new JSplitPane();
 		midMidPanel.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		fileTextPane    = new EditorPanel();
-		fileTextPane.setFont(new Font("Consolas", Font.PLAIN, fontSize));
+		fileTextPane.setFont(new Font("Consolas", Font.PLAIN, FONT_SIZE));
 		setUndoFeature();
 		resetFileText();
 
 		resultsTextArea = new JTextArea();
 		resultsTextArea.setForeground(Color.WHITE);
 		resultsTextArea.setBackground(Color.BLACK);
-		resultsTextArea.setFont(new Font("Consolas", Font.PLAIN, fontSize));
+		resultsTextArea.setFont(new Font("Consolas", Font.PLAIN, FONT_SIZE));
 		resultsTextArea.setAutoscrolls(true);
 		resultsTextArea.setEditable(false);
 	

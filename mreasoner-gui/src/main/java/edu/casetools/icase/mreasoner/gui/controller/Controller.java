@@ -79,7 +79,7 @@ public class Controller {
 	}
 	
 	public void setDividersAtDefaultLocation(){
-		view.getMainWindow().getMainPanel().getMainSplitPane().setDividerLocation(0.28);
+		view.getMainWindow().getMainPanel().getMainSplitPane().setDividerLocation(0.22);
 		view.getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().getSplitPane().setDividerLocation(0.5);
 	}
 	
@@ -94,7 +94,7 @@ public class Controller {
 			view.getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setSystemDeclarationFilePath(configs.getSystemSpecificationFilePath());
 			view.getMainWindow().setTitle("M Specification File Editor - "+configs.getSystemSpecificationFilePath());
 		}
-		view.getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().centerSplitPaneDivider();
+		//view.getMainWindow().getMainPanel().getSystemSpecificationEditorPanel().centerSplitPaneDivider();
 	}
 
 	private void setListeners(){

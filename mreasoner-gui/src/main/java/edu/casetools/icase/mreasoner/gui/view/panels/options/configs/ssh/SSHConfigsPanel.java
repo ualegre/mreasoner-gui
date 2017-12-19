@@ -1,5 +1,6 @@
 package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.ssh;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -37,6 +38,7 @@ public class SSHConfigsPanel extends JPanel{
 		configureElements();
 
 		this.setLayout(new GridLayout(1,0));
+		this.setPreferredSize(new Dimension(300,50));
         sshConfigsPanel.setBorder(titledBorder);
         this.add(sshConfigsPanel);
         this.setSSHConfigs(configs);
@@ -46,7 +48,7 @@ public class SSHConfigsPanel extends JPanel{
 	private void configureElements() {
         startButton.setFocusable(false);
      	startButton.setHorizontalAlignment( SwingConstants.CENTER );
-     	buttonPanel.setBorder(BorderFactory.createEmptyBorder(2,10,2,4));
+     	buttonPanel.setBorder(BorderFactory.createEmptyBorder(25,10,50,4));
      	buttonPanel.add(startButton);   
      	buttonPanel.add(restartButton);
      	buttonPanel.add(stopButton); 

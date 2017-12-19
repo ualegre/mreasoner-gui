@@ -1,6 +1,8 @@
 package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.database;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -42,34 +44,43 @@ public class DatabaseConfigsPanel extends JPanel{
         addPanels();
 		configureElements();
 
-		this.setLayout(new GridLayout(1,0));
-        dbConfigsPanel.setBorder(titledBorder);
-        this.add(dbConfigsPanel);
+		//this.setLayout(new GridLayout(1,0));
+
+        this.setLayout(new BorderLayout());
+
         this.setDBConfigs(configs);
-	
+//       // this.setPreferredSize(new Dimension(200, 700));
+//        dbConfigsPanel.setPreferredSize(new Dimension(100, 100));
+        this.add(dbConfigsPanel, BorderLayout.NORTH);
+        this.setBorder(titledBorder);
+        
 	}
 	
 	private void configureElements() {
         connectButton.setFocusable(false);
      	connectButton.setHorizontalAlignment( SwingConstants.CENTER );
-     	buttonPanel.setBorder(BorderFactory.createEmptyBorder(2,10,2,4));
+     	connectButton.setPreferredSize(new Dimension(100,20));
+
      	buttonPanel.add(conectionStatus);
      	buttonPanel.add(connectButton);   
-     	
+  	
         passLabel.setLabelFor(passField);
         
         SpringUtilities.makeCompactGrid(dbConfigsPanel,
                 7, 2, 		  //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
+        dbConfigsPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        
+
 		
 	}
 
 	private void initializeElements(){
 		dbConfigsPanel 	 = new JPanel(new SpringLayout());
     	comboBox  	 = new JComboBox<String>(MDBImplementations.getNames());
-					initJLabels();
-					initTextFields();
+		initJLabels();
+		initTextFields();
 		passField 	  = new JPasswordField(20);
         connectButton = new JButton("Refresh");
      	buttonPanel   = new JPanel(new GridLayout(1,3));	

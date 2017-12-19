@@ -58,7 +58,7 @@ public class TimeConfigsPanel extends JPanel{
 //         p.add(relativeTimeValueTf);
 //		   this.setTimeConfigs(configs);
 		
-    	this.add(p,BorderLayout.CENTER);
+    	this.add(p,BorderLayout.NORTH);
     	
 
         SpringUtilities.makeCompactGrid(p,
