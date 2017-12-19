@@ -16,7 +16,7 @@ public class ConfigsTabPanel extends JPanel{
 	FilePathsPanel filePathPanel;
 	
 	public ConfigsTabPanel(MConfigs configs){
-		this.setLayout( new GridLayout(5,1) );
+		this.setLayout( new GridLayout(3,1) );
         filePathPanel = new FilePathsPanel(configs.getFilesConfigs());
 		timeConfigs    = new TimeConfigsPanel(configs);
 		generalConfigs = new GeneralConfigsPanel(configs);
@@ -24,10 +24,8 @@ public class ConfigsTabPanel extends JPanel{
 	    this.add(generalConfigs);
 	    this.add(timeConfigs);
 	    this.add(filePathPanel);
-	    this.add(new JPanel());
-	    this.add(new JPanel());	    
-      
-       
+
+        
 	}
 	public TimeConfigsPanel getTimeConfigsPanel(){
 		return timeConfigs;

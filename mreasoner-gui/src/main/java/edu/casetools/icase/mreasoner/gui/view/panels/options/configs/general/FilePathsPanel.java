@@ -1,11 +1,14 @@
 package edu.casetools.icase.mreasoner.gui.view.panels.options.configs.general;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.LookAndFeel;
 import javax.swing.SpringLayout;
 import javax.swing.border.TitledBorder;
 
@@ -25,8 +28,10 @@ public class FilePathsPanel extends JPanel{
 	
 	public FilePathsPanel(FilesConfigs configs){
 		 //mainPanel = new JPanel(new SpringLayout());
-		this.setLayout(new SpringLayout());
+		this.setLayout(new BorderLayout());
 		 TitledBorder titledBorder = BorderFactory.createTitledBorder("File Paths Configurations");
+		 JPanel mainPanel = new JPanel();
+			mainPanel.setLayout(new SpringLayout());
 		 //mainPanel.setBorder(titledBorder);
 		 this.setBorder(titledBorder);
 		 specificationLabel = new JLabel("M Specification File Path");
@@ -46,23 +51,32 @@ public class FilePathsPanel extends JPanel{
 		 sshConfigsPathLabel 		= new JLabel(writeNull(configs.getSessionFilePath()));
 		 sshConfigsPathLabel.setForeground(Color.LIGHT_GRAY);
 		 
-	     this.add( specificationLabel );
-	     this.add( specificationPathLabel );
-	     this.add( resultsLabel );   
-	     this.add( resultsPathLabel );
-	     this.add( LFPUBSLabel );
-	     this.add( LFPUBSPathLabel );
-	     this.add( configsLabel );   
-	   	 this.add( configsPathLabel );
-	     this.add( sshConfigsLabel );   
-	   	 this.add( sshConfigsPathLabel );
+		 
+		 
+		 mainPanel.add( specificationLabel );
+		 mainPanel.add( specificationPathLabel );
+		 mainPanel.add( resultsLabel );   
+		 mainPanel.add( resultsPathLabel );
+		 mainPanel.add( LFPUBSLabel );
+		 mainPanel.add( LFPUBSPathLabel );
+		 mainPanel.add( configsLabel );   
+		 mainPanel.add( configsPathLabel );
+		 mainPanel.add( sshConfigsLabel );   
+		 mainPanel.add( sshConfigsPathLabel );
+		 
+        JScrollPane scroller = new JScrollPane(mainPanel);
+        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        LookAndFeel.installBorder(scroller, "BorderFactory.createEmptyBorder()");  
+       // scroller.add(mainPanel);
+
 	   	 
-        SpringUtilities.makeCompactGrid(this,
+        SpringUtilities.makeCompactGrid(mainPanel,
                 10, 1, 		  //rows, cols
                 6, 6,        //initX, initY
                 6, 6);       //xPad, yPad
 	 //  	 mainPanel.add(this);
-		 
+        //this.add(mainPanel, BorderLayout.CENTER);
+        this.add(scroller, BorderLayout.CENTER);
 	}
 	
 	public String writeNull(String line){
