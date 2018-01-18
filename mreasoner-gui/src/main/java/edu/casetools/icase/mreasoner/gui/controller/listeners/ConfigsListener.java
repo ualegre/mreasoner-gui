@@ -64,11 +64,8 @@ public class ConfigsListener implements ActionListener{
 			clearEventsTable(con);
 			clearInternalEventsTable(con);
 			clearResultsTable(con);
-			
 			clearSensorsTable(con);
-			clearActuatorsTable(con);
 			clearSensorsImplementationTable(con);
-			clearActuatorsImplementationTable(con);
 			refresh();
 		}
 		
@@ -77,31 +74,16 @@ public class ConfigsListener implements ActionListener{
 	private void clearSensorsImplementationTable(DatabaseOperations con) {
 		boolean clearTable = controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getTableCreationPanel().getSensorsImplementationCb().isSelected();
 		if(clearTable){
-			con.eraseSensorImplementationTable();
+			con.eraseDevicesTable();
 		}
 		
 	}
 
-	private void clearActuatorsImplementationTable(DatabaseOperations con) {
-		boolean clearTable = controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getTableCreationPanel().getActuatorsImplementationCb().isSelected();
-		if(clearTable){
-			con.eraseActuatorImplementationTable();
-		}
-		
-	}
-
-	private void clearActuatorsTable(DatabaseOperations con) {
-		boolean clearTable = controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getTableCreationPanel().getActuatorsCb().isSelected();
-		if(clearTable){
-			con.eraseActuatorTable();
-		}
-		
-	}
 
 	private void clearSensorsTable(DatabaseOperations con) {
 		boolean clearTable = controller.getView().getMainWindow().getMainPanel().getDatabaseConfigsTabPanel().getTableCreationPanel().getSensorsCb().isSelected();
 		if(clearTable){
-			con.eraseSensorTable();
+			con.eraseDeviceMappingTable();
 		}
 	}
 
@@ -179,13 +161,12 @@ public class ConfigsListener implements ActionListener{
 	
 	private void createTables(DatabaseOperations con){
 		con.connect();
+		con.createDataTypesTable();
+		con.createDevicesTable();
+		con.createDeviceMappingTable();
 		con.createEventsTable();
 		con.createInternalEventsTable();
-	//	con.createResultsTable(new Vector<String>());
-		con.createSensorTable();
-		con.createActuatorTable();
-		con.createSensorImplementationTable();
-		con.createActuatorImplementationTable();
+		con.insertDevices(controller.getModel().getSensorObservers());
 		con.disconnect();
 	}
 
@@ -252,7 +233,8 @@ public class ConfigsListener implements ActionListener{
 			con.reconnect(configs.getDBConfigs());
 			status = con.checkConnection();
 			if(status == STATUS.CONNECTED){
-				con.createSensorTable();
+				con.createDeviceMappingTable();
+				con.insertDevices(controller.getModel().getSensorObservers());
 				updateTableModels(con);
 			}else{
 				System.out.println("ERROR: There was an error connecting to the database: Status connection "+status);

@@ -14,26 +14,16 @@ public class SensorsTableModel extends DefaultModel{
 	
 	public void updateTable(DatabaseOperations con){
 
-		super.defaultUpdateTable(con.getSensorTableContent());
+		super.defaultUpdateTable(con.getDeviceMappingTableContent());
 		      
 	}
 	
-	public void removeSensorRelation(DatabaseOperations con,String device,String implementation, String state){
-		
-		//con.connect();	
-		con.removeSensorTableRelation(device,implementation, state);
+	public void removeSensorRelation(DatabaseOperations con,String device, String state){
+		con.removeDeviceMappingTableRelation(device, state);
 
 	}
 	
-//	public void update(){
-//		if (this.getRowCount() > 0) {
-//		    for (int i = this.getRowCount() - 1; i > -1; i--) {
-//		        this.removeRow(i);
-//		    }
-//		}
-//	}
-	
-	public void addSensorRelation(DatabaseOperations con,String device,String implementation,String state){
-		con.newSensorTableRelation(device, implementation, state);
+	public void addSensorRelation(DatabaseOperations con,String device, String state){
+		con.newDeviceMappingTableRelation(device, state);
 	}
 }

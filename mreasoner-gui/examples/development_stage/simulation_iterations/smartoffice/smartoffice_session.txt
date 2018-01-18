@@ -52,6 +52,15 @@ postgres
 <DATABASE_NAME> 
 sensors
 </DATABASE_NAME> 
-<EXTERNAL_JARS> 
-"java -jar c:/a.jar,java -jar c:/b.jar"
-</EXTERNAL_JARS> 
+<HOSTNAME> 
+<hostname>
+</HOSTNAME> 
+<PORT> 
+22
+</PORT> 
+<USERNAME> 
+<username>
+</USERNAME> 
+<PASSWORD> 
+<password>
+</PASSWORD> 

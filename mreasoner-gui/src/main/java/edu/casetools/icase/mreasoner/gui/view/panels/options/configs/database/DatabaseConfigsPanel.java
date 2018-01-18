@@ -78,7 +78,7 @@ public class DatabaseConfigsPanel extends JPanel{
 
 	private void initializeElements(){
 		dbConfigsPanel 	 = new JPanel(new SpringLayout());
-    	comboBox  	 = new JComboBox<String>(MDBImplementations.getNames());
+    	comboBox  	 = new JComboBox<String>(MDBImplementations.getDBImplementationNames());
 		initJLabels();
 		initTextFields();
 		passField 	  = new JPasswordField(20);

@@ -8,6 +8,7 @@ import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperationsFactory;
 import edu.casetools.icase.mreasoner.deployment.Launcher;
+import edu.casetools.icase.mreasoner.deployment.sensors.SensorObserver;
 import edu.casetools.icase.mreasoner.gui.model.io.IOManager;
 import edu.casetools.icase.mreasoner.learning.LFPUBSTranslatorWrapper;
 import edu.casetools.icase.mreasoner.vera.actuators.device.Actuator;
@@ -15,25 +16,35 @@ import edu.casetools.icase.mreasoner.verification.NuSMVExportManager;
 
 public class Model {
 
-	private IOManager   			 testerModel;
-	private Launcher 				 reasonerModel;
-    private LFPUBSTranslatorWrapper  lfpubsTranslModel;
-	private NuSMVExportManager 		 exporterModel;
-	private DatabaseOperations  	 dbOperations;
-	private MConfigsLoader     		 configsReader;
-	private Vector<Actuator> 		 actuators;
-
+	private IOManager   			 			testerModel;
+	private Launcher 				 			reasonerModel;
+    private LFPUBSTranslatorWrapper  			lfpubsTranslModel;
+	private NuSMVExportManager 		 			exporterModel;
+	private DatabaseOperations  	 			dbOperations;
+	private MConfigsLoader     		 			configsReader;
+	private Vector<Actuator> 		 			actuators;
+	private Vector<SensorObserver>				sensorObservers;
 	
-	public Model(MDBConfigs configs, Vector<Actuator> actuators){
+	public Model(MDBConfigs configs, Vector<Actuator> actuators, Vector<SensorObserver> sensorObservers){
 		this.actuators 	  = actuators;
+		this.sensorObservers = sensorObservers;
 		testerModel 	  = new IOManager();
 		exporterModel 	  = new NuSMVExportManager();
 		lfpubsTranslModel = new LFPUBSTranslatorWrapper();
 		configsReader 	  = new MConfigsLoader();
+
 		if(configs != null){
 			dbOperations  = DatabaseOperationsFactory.getDatabaseOperations( configs );
 		}
 		
+	}
+	
+	public Vector<SensorObserver> getSensorObservers() {
+		return sensorObservers;
+	}
+
+	public void setSensorObservers(Vector<SensorObserver> sensorObservers) {
+		this.sensorObservers = sensorObservers;
 	}
 
 	public IOManager getTesterModel() {
@@ -65,7 +76,7 @@ public class Model {
 	}
 
 	public void startReasoner(String configFileName) {
-		reasonerModel = new Launcher(actuators);
+		reasonerModel = new Launcher(actuators, sensorObservers);
 		reasonerModel.readMSpecification(reasonerModel.readMConfigs(configFileName));
 		reasonerModel.start();
 	}
