@@ -20,18 +20,18 @@ public class TemperatureObserver extends SensorObserver{
 		return result;
 	}
 
-	private boolean applyBatteryHighModellingRule(int intValue) {
-		if(intValue >= 70) return true;
+	private boolean applyBatteryHighModellingRule(int sensorValue) {
+		if(sensorValue >= 70) return true;
 		else return false;
 	}
 
-	private boolean applyBatteryMedModellingRule(int intValue) {
-		if(intValue < 70 && intValue > 30) return true;
+	private boolean applyBatteryMedModellingRule(int sensorValue) {
+		if(sensorValue < 70 && sensorValue > 30) return true;
 		else return false;
 	}
 
-	private boolean applyBatteryLowModellingRule(int intValue) {
-		if(intValue <= 30) return true;
+	private boolean applyBatteryLowModellingRule(int sensorValue) {
+		if(sensorValue <= 30) return true;
 		else return false;
 	}
 	
