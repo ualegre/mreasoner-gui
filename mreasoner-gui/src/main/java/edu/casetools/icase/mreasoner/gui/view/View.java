@@ -14,20 +14,13 @@ public class View {
 
 	public enum PANEL {MAIN_PANEL,TEST_CASE_MGR};
 	
-	public View(MConfigs configs){
-		mainWindow = new MainWindow(configs);
-		//setLookAndFeel();
+	public View(){
 		
-
 	}
 	
-//	private void setLookAndFeel(){
-//		try {
-//			  UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//
-//			} catch (Exception e) {
-//			  }
-//	}
+	public void startMainWindow(){
+		mainWindow = new MainWindow(new MConfigs());
+	}
 	
 	public void changePanel(JPanel panel){
 		mainWindow.getContentPane().removeAll();

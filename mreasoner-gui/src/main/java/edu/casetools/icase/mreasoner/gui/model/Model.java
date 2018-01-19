@@ -1,17 +1,14 @@
 package edu.casetools.icase.mreasoner.gui.model;
 
-import java.util.Vector;
-
 import edu.casetools.icase.mreasoner.configs.MConfigsLoader;
 import edu.casetools.icase.mreasoner.configs.data.MConfigs;
 import edu.casetools.icase.mreasoner.configs.data.db.MDBConfigs;
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperations;
 import edu.casetools.icase.mreasoner.database.core.operations.DatabaseOperationsFactory;
 import edu.casetools.icase.mreasoner.deployment.Launcher;
-import edu.casetools.icase.mreasoner.deployment.sensors.SensorObserver;
+import edu.casetools.icase.mreasoner.deployment.realenvironment.AbstractDeploymentModule;
 import edu.casetools.icase.mreasoner.gui.model.io.IOManager;
 import edu.casetools.icase.mreasoner.learning.LFPUBSTranslatorWrapper;
-import edu.casetools.icase.mreasoner.vera.actuators.device.Actuator;
 import edu.casetools.icase.mreasoner.verification.NuSMVExportManager;
 
 public class Model {
@@ -22,29 +19,17 @@ public class Model {
 	private NuSMVExportManager 		 			exporterModel;
 	private DatabaseOperations  	 			dbOperations;
 	private MConfigsLoader     		 			configsReader;
-	private Vector<Actuator> 		 			actuators;
-	private Vector<SensorObserver>				sensorObservers;
+	private AbstractDeploymentModule 			module;
 	
-	public Model(MDBConfigs configs, Vector<Actuator> actuators, Vector<SensorObserver> sensorObservers){
-		this.actuators 	  = actuators;
-		this.sensorObservers = sensorObservers;
+	public Model(AbstractDeploymentModule module){
+		
 		testerModel 	  = new IOManager();
 		exporterModel 	  = new NuSMVExportManager();
 		lfpubsTranslModel = new LFPUBSTranslatorWrapper();
 		configsReader 	  = new MConfigsLoader();
-
-		if(configs != null){
-			dbOperations  = DatabaseOperationsFactory.getDatabaseOperations( configs );
-		}
+		setDeploymentModule(module);
+		dbOperations  = DatabaseOperationsFactory.getDatabaseOperations( new MDBConfigs() );
 		
-	}
-	
-	public Vector<SensorObserver> getSensorObservers() {
-		return sensorObservers;
-	}
-
-	public void setSensorObservers(Vector<SensorObserver> sensorObservers) {
-		this.sensorObservers = sensorObservers;
 	}
 
 	public IOManager getTesterModel() {
@@ -76,7 +61,7 @@ public class Model {
 	}
 
 	public void startReasoner(String configFileName) {
-		reasonerModel = new Launcher(actuators, sensorObservers);
+		reasonerModel = new Launcher(module);
 		reasonerModel.readMSpecification(reasonerModel.readMConfigs(configFileName));
 		reasonerModel.start();
 	}
@@ -96,6 +81,14 @@ public class Model {
 	public MConfigsLoader getSSHConfigsReader() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public AbstractDeploymentModule getDeploymentModule() {
+		return module;
+	}
+
+	public void setDeploymentModule(AbstractDeploymentModule module) {
+		this.module = module;
 	}
 
 }

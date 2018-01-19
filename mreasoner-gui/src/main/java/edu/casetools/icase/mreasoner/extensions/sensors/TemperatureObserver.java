@@ -1,4 +1,4 @@
-package edu.casetools.icase.mreasoner.gui;
+package edu.casetools.icase.mreasoner.extensions.sensors;
 
 import edu.casetools.icase.mreasoner.deployment.sensors.SensorObserver;
 

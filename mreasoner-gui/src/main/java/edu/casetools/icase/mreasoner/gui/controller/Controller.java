@@ -25,30 +25,49 @@ public class Controller {
 	TabbedPaneListener tabbedPaneListener;
 
 
-	public Controller(View view, Model model, FilesConfigs configs){
-		//STATUS status;
+	public Controller(View view, Model model){
+		state        = STATE.MAIN_PANEL;
 		this.view 	 = view;
 		this.model   = model;
-		state        = STATE.MAIN_PANEL;
+		initListeners();
+		setListeners();
+		disablePanels();
+		initConfigs();		
+		sleep();		
+		setDividersAtDefaultLocation();
 
+	}
+
+	private void disablePanels() {
+		view.getMainWindow().getMainPanel().getTranslataionsPanel().disableTopPanel();
+		view.getMainWindow().getMainPanel().getTranslataionsPanel().disableBotPanel();
+	}
+
+	private void initConfigs() {
+		FilesConfigs configs = new FilesConfigs();
+		setFileOfSystemSpecificationEditor(configs);
+		setFileOfLFPUBSRuleTranslationEditor(configs);
+		setFileOfLog(configs);
+		setFileOfConfigs(configs);
+	}
+
+	private void initListeners() {
 		mainMenuListener 		= new MainMenuListener(this);
 		configsListener 		= new ConfigsListener(this);
 		iterationTimeRBListener = new IterationTimeRadioButtonListener(this);
 		relativeTimeRBListener  = new RelativeTimeRadioButtonListener(this);
 		stratificationListener  = new StratificationRadioButtonListener(this);
 		tabbedPaneListener 		= new TabbedPaneListener(this);
-
-		view.getMainWindow().getMainPanel().getTranslataionsPanel().disableTopPanel();
-		view.getMainWindow().getMainPanel().getTranslataionsPanel().disableBotPanel();
-		this.setListeners();
-		setFileOfSystemSpecificationEditor(configs);
-		setFileOfLFPUBSRuleTranslationEditor(configs);
-		setFileOfLog(configs);
-		setFileOfConfigs(configs);
-		
-		setDividersAtDefaultLocation();
-
 	}
+	
+	public void sleep() {
+		try {
+			Thread.sleep(400);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void setFileOfConfigs(FilesConfigs configs) {
 		if(configs.existsConfigsFilePath()){
 			view.getMainWindow().getMainPanel().getConfigsPanel().getFilePathsPanel().setConfigsPath(configs.getSessionFilePath());
@@ -127,5 +146,10 @@ public class Controller {
 	public void setState(STATE state) {
 		this.state = state;
 	}
+	
+	public void start(){
+		view.startMainWindow();
+	}
+
 	
 }

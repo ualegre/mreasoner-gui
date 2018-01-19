@@ -166,7 +166,7 @@ public class ConfigsListener implements ActionListener{
 		con.createDeviceMappingTable();
 		con.createEventsTable();
 		con.createInternalEventsTable();
-		con.insertDevices(controller.getModel().getSensorObservers());
+		con.insertDevices(controller.getModel().getDeploymentModule().getSensorObservers());
 		con.disconnect();
 	}
 
@@ -234,7 +234,7 @@ public class ConfigsListener implements ActionListener{
 			status = con.checkConnection();
 			if(status == STATUS.CONNECTED){
 				con.createDeviceMappingTable();
-				con.insertDevices(controller.getModel().getSensorObservers());
+				con.insertDevices(controller.getModel().getDeploymentModule().getSensorObservers());
 				updateTableModels(con);
 			}else{
 				System.out.println("ERROR: There was an error connecting to the database: Status connection "+status);
