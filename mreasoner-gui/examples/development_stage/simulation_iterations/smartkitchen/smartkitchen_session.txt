@@ -11,7 +11,7 @@ false
 0
 </FIXED_ITERATION_TIME> 
 <EXECUTION_TIME> 
-2577
+25775
 </EXECUTION_TIME> 
 <USE_MAX_EXECUTION_TIME> 
 true
@@ -20,7 +20,7 @@ true
 .\examples\development_stage\simulation_iterations\smartkitchen\smartkitchen_rules.mtpl
 </SYSTEM_SPECIFICATION_FILE_PATH> 
 <RESULTS_FILE_PATH> 
-null
+C:\Users\Unai\Desktop\test.txt
 </RESULTS_FILE_PATH> 
 <LFPUBS_OUTPUT_FILE_PATH> 
 .\examples\lfpubs\lfpubs_output.txt
@@ -32,7 +32,7 @@ null
 null
 </SSH_CONFIGS_FILE_PATH> 
 <DATABASE_TYPE> 
-PostgreSQL
+POSTGRESQL
 </DATABASE_TYPE> 
 <DATABASE_DRIVER> 
 org.postgresql.Driver
@@ -52,6 +52,15 @@ postgres
 <DATABASE_NAME> 
 sensors
 </DATABASE_NAME> 
-<EXTERNAL_JARS> 
-"java -jar c:/a.jar,java -jar c:/b.jar"
-</EXTERNAL_JARS> 
+<HOSTNAME> 
+<hostname>
+</HOSTNAME> 
+<PORT> 
+22
+</PORT> 
+<USERNAME> 
+<username>
+</USERNAME> 
+<PASSWORD> 
+<password>
+</PASSWORD> 

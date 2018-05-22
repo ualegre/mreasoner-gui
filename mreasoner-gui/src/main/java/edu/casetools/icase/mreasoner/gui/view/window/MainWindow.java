@@ -75,5 +75,8 @@ public class MainWindow extends JFrame {
 		return mainPanel;
 	}
 
+	public void setVisible(){
+		this.setVisible(true);
+	}
 	
 }

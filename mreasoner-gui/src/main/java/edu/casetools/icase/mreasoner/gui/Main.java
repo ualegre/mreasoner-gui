@@ -9,8 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 			
-			Controller controller = new Controller(new View(),new Model(new ExampleDeploymentModule()));
-			controller.start();
+			new Controller(new View(),new Model(new ExampleDeploymentModule()));
 			
 	}
 

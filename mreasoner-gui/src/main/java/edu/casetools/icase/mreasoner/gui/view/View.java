@@ -15,7 +15,7 @@ public class View {
 	public enum PANEL {MAIN_PANEL,TEST_CASE_MGR};
 	
 	public View(){
-		
+
 	}
 	
 	public void startMainWindow(){

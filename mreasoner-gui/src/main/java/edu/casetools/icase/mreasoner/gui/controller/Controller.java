@@ -29,6 +29,7 @@ public class Controller {
 		state        = STATE.MAIN_PANEL;
 		this.view 	 = view;
 		this.model   = model;
+		view.startMainWindow();
 		initListeners();
 		setListeners();
 		disablePanels();
