@@ -2,7 +2,7 @@ package edu.casetools.icase.mreasoner.extensions.sensors;
 
 import edu.casetools.icase.mreasoner.deployment.sensors.SensorObserver;
 
-public class TemperatureObserver extends SensorObserver{
+public class BatteryObserver extends SensorObserver{
 
 
 	@Override

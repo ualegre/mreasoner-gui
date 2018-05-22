@@ -117,18 +117,12 @@ public class Controller {
 	}
 
 	private void setListeners(){
-		this.controlTesterPanel();
-	}
-
-	private void controlTesterPanel(){
-	
 		view.getMainWindow().getMainPanel().addMainMenuListener(mainMenuListener);
 		view.getMainWindow().getMainPanel().addConfigsListener(configsListener);
 		view.getMainWindow().getMainPanel().addIterationTimeRBListener(iterationTimeRBListener);
 		view.getMainWindow().getMainPanel().addRelativeTimeRBListener(relativeTimeRBListener);
 		view.getMainWindow().getMainPanel().addStratificationPanelListener(stratificationListener);
 		view.getMainWindow().getMainPanel().addTabbedPaneListener(tabbedPaneListener);
-		
 	}
 
 	public View getView() {

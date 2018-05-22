@@ -1,8 +1,6 @@
-states(cookerOn, atKitchen, cabinet, kettleOn, 
-waterTapOn, cookerUnattended, hazard, pattern_0, 
-pattern_1, pattern_2, pattern_3, pattern_4, 
-pattern_5, time_context); 
+states([forEach ContextState] [ContextState.name], [end forEach] ); 
 
+[forEach ContextState where ContextState.isIndependent = true]
 is(cookerOn); is(#cookerOn);
 is(atKitchen); is(#atKitchen);
 is(cabinet); is(#cabinet);
